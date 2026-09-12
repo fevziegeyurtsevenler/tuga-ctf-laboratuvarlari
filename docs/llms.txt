@@ -1,0 +1,10 @@
+# TÜGA CTF Laboratuvarları
+
+> Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları dizini. TÜGA Siber Güvenlik Komitesi yürütür; her lab en az 2 farklı zafiyet ve 2 flag içerir, PR ile katkıya açıktır.
+
+- Site: https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari
+- Repo: https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari
+- Lab sayısı: 1 | Alan: 1 | Toplam flag: 2
+
+## Laboratuvarlar
+- TÜGA İç Portalı (Web, Kolay) — TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de "selamlama" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini s

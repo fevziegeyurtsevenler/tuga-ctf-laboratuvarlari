@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TÜGA CTF Laboratuvarları</title>
+<meta name="description" content="Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları. 1 lab, 1 alan, 2 flag. TÜGA Siber Güvenlik Komitesi.">
+<link rel="canonical" href="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TÜGA CTF Laboratuvarları">
+<meta property="og:description" content="1 senaryolu, Docker ile lokalde çalışan Türkçe CTF lab'ı — 2 flag. TÜGA Siber Güvenlik Komitesi'nin ortak eseri.">
+<meta property="og:url" content="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/">
+<meta property="og:image" content="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/assets/tuga-logo.jpeg">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='38' cy='50' r='20' fill='%231C2957'/><circle cx='72' cy='38' r='9' fill='%231C2957'/><circle cx='70' cy='68' r='6' fill='%231C2957'/><rect x='50' y='44' width='26' height='9' rx='4.5' fill='%231C2957' transform='rotate(-14 50 44)'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "TÜGA CTF Laboratuvarları", "description": "Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları dizini.", "url": "https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari", "inLanguage": "tr", "dateModified": "2026-09-12", "publisher": {"@type": "Organization", "name": "TÜGA Siber Güvenlik Komitesi"}, "mainEntity": {"@type": "ItemList", "numberOfItems": 1, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TÜGA İç Portalı", "url": "https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/tree/main/labs/sablon-lab", "description": "TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de \"selamlama\" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini sömürünce bir flag açığa çıkıyor. Amacın: yetkin olmayan yerlere ulaşmak."}]}}</script>
+<style>
+:root{
+  --lacivert:#1C2957; --lacivert-koyu:#121C3D; --murekkep:#1B2340;
+  --soluk:#5C6683; --zemin:#FFFFFF; --kagit:#F4F6FB; --cizgi:#E1E6F2;
+  --mavi:#2E4FD0; --mavi-acik:#E9EDFB;
+  --yesil:#1E7A55; --yesil-bg:#E8F6EF; --amber:#9A6A00; --amber-bg:#FBF1DD;
+  --kirmizi:#C0392B; --kirmizi-bg:#FDECEC;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--zemin); color:var(--murekkep);
+  font-family:"Manrope",system-ui,sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden}
+h1,h2,h3{font-family:"Sora",system-ui,sans-serif; letter-spacing:-.015em}
+a{color:var(--mavi)}
+
+.ustbar{position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px;
+  padding:12px 24px; background:rgba(255,255,255,.97); border-bottom:1px solid var(--cizgi)}
+.marka{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--murekkep); font-family:"Sora"; font-weight:700; font-size:15px}
+.marka svg{width:30px; height:30px}
+.ustbar nav{margin-left:auto; display:flex; gap:8px; align-items:center}
+.ustbar nav a{text-decoration:none; font-weight:600; font-size:14px; color:var(--soluk); padding:7px 13px; border-radius:9px; transition:.18s}
+.ustbar nav a:hover{color:var(--lacivert); background:var(--kagit)}
+.ustbar nav a.birincil{background:var(--lacivert); color:#fff}
+.ustbar nav a.birincil:hover{background:var(--lacivert-koyu)}
+
+.hero{position:relative; overflow:hidden; background:linear-gradient(180deg,#FBFCFE 0%,var(--kagit) 100%)}
+#ag{position:absolute; inset:0; width:100%; height:100%}
+.hero-ic{position:relative; max-width:880px; margin:0 auto; text-align:center; padding:92px 24px 82px}
+.rozet-ust{display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--mavi); background:var(--mavi-acik); padding:6px 14px; border-radius:999px; margin-bottom:18px}
+.hero h1{font-size:clamp(34px,6vw,56px); font-weight:800; color:var(--lacivert); margin:0 0 14px; text-wrap:balance}
+.hero h1 .vurgu{color:var(--mavi)}
+.hero .alt{max-width:62ch; margin:0 auto 30px; color:var(--soluk); font-size:17px}
+.sayilar{display:flex; justify-content:center; gap:38px; margin:0 0 34px; flex-wrap:wrap}
+.sayi b{display:block; font-family:"Sora"; font-size:32px; font-weight:800; color:var(--lacivert); font-variant-numeric:tabular-nums}
+.sayi span{font-size:13px; color:var(--soluk); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
+.cta{display:flex; justify-content:center; gap:12px; flex-wrap:wrap}
+.dugme{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; font-size:15px; padding:13px 26px; border-radius:12px; transition:.18s; cursor:pointer; border:0}
+.dugme.dolu{background:var(--lacivert); color:#fff; box-shadow:0 6px 22px rgba(28,41,87,.28)}
+.dugme.dolu:hover{background:var(--lacivert-koyu); transform:translateY(-2px)}
+.dugme.bos{background:#fff; color:var(--lacivert); border:1.5px solid var(--cizgi)}
+.dugme.bos:hover{border-color:var(--lacivert); transform:translateY(-2px)}
+
+.arac{max-width:1080px; margin:-30px auto 0; padding:0 24px; position:relative; z-index:5}
+.arama-kutu{display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--cizgi);
+  border-radius:16px; padding:16px 22px; box-shadow:0 12px 40px rgba(28,41,87,.10)}
+.arama-kutu svg{flex:none; color:var(--soluk)}
+.arama-kutu input{flex:1; border:0; outline:0; font:inherit; font-size:16px; color:var(--murekkep); background:transparent}
+.arama-kutu input::placeholder{color:#9AA2B8}
+.filtre-satir{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:14px 0 0}
+.filtre-satir .etiket-baslik{font-size:12px; font-weight:700; color:var(--soluk); text-transform:uppercase; letter-spacing:.06em; margin-right:2px}
+.cip{font:inherit; font-size:13px; font-weight:600; color:var(--soluk); background:#fff;
+  border:1px solid var(--cizgi); border-radius:999px; padding:7px 14px; cursor:pointer; transition:.15s}
+.cip b{color:var(--lacivert); font-variant-numeric:tabular-nums}
+.cip:hover{border-color:var(--lacivert); color:var(--lacivert)}
+.cip.secili{background:var(--lacivert); color:#fff; border-color:var(--lacivert)}
+.cip.secili b{color:#AEB9E8}
+.cip:focus-visible,.dugme:focus-visible,.btn:focus-visible{outline:2px solid var(--mavi); outline-offset:2px}
+
+main{max-width:1080px; margin:0 auto; padding:30px 24px 60px}
+.izgara{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
+.kart{display:flex; flex-direction:column; gap:10px; background:#fff; border:1px solid var(--cizgi);
+  border-radius:16px; padding:20px; opacity:0; transform:translateY(14px)}
+.kart.gorunur{opacity:1; transform:none; transition:opacity .5s, transform .5s}
+.kart:hover{border-color:var(--lacivert); box-shadow:0 12px 30px rgba(28,41,87,.10)}
+.kart-ust{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.rozet-alan{font-size:12px; font-weight:700; color:var(--lacivert); background:var(--kagit); border:1px solid var(--cizgi); padding:3px 10px; border-radius:999px}
+.rozet-zor{font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 10px; border-radius:999px}
+.zor-kolay{background:var(--yesil-bg); color:var(--yesil)}
+.zor-orta{background:var(--amber-bg); color:var(--amber)}
+.zor-zor{background:var(--kirmizi-bg); color:var(--kirmizi)}
+.rozet-sablon{font-size:11px; font-weight:700; color:#fff; background:var(--mavi); padding:3px 10px; border-radius:999px}
+.kart h3{font-size:18px; margin:0; line-height:1.3; color:var(--lacivert)}
+.senaryo{margin:0; font-size:14px; color:var(--soluk)}
+.zaf{font-size:13px}
+.zaf summary{cursor:pointer; font-weight:700; color:var(--murekkep); font-size:13px}
+.zaf ul{margin:8px 0 0; padding-left:20px; color:var(--soluk)}
+.zaf li{margin:2px 0}
+.etiketler{display:flex; flex-wrap:wrap; gap:6px}
+.etiket{font-size:11px; font-weight:600; color:var(--mavi); background:var(--mavi-acik); padding:2px 9px; border-radius:999px; font-family:"JetBrains Mono",monospace}
+.yazar{font-size:13px; color:var(--soluk)}
+.yazar a{font-weight:600; text-decoration:none}
+.yazar a:hover{text-decoration:underline}
+.kart-alt{display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:6px}
+.btn{font:inherit; font-size:13px; font-weight:700; padding:9px 14px; border-radius:10px; cursor:pointer; border:1.5px solid var(--cizgi); background:#fff; color:var(--lacivert); transition:.15s}
+.btn:hover{border-color:var(--lacivert)}
+.kur-btn{flex:1}
+.bayrak-btn{background:var(--lacivert); color:#fff; border-color:var(--lacivert)}
+.bayrak-btn:hover{background:var(--lacivert-koyu)}
+
+.bayrak-panel{border-top:1px dashed var(--cizgi); padding-top:12px; display:flex; flex-direction:column; gap:12px}
+.bayrak-satir label{display:block; font-size:12.5px; color:var(--soluk); margin-bottom:5px}
+.bayrak-giris{display:flex; gap:8px; align-items:center}
+.bayrak-giris input{flex:1; font:inherit; font-size:14px; font-family:"JetBrains Mono",monospace; padding:9px 12px; border:1.5px solid var(--cizgi); border-radius:9px; outline:0}
+.bayrak-giris input:focus{border-color:var(--mavi)}
+.bayrak-giris input.dogru{border-color:var(--yesil); background:var(--yesil-bg)}
+.bayrak-giris input.yanlis{border-color:var(--kirmizi); background:var(--kirmizi-bg)}
+.durum{font-size:18px; width:24px; text-align:center}
+.hepsi-tamam{font-size:13.5px; font-weight:700; color:var(--yesil); background:var(--yesil-bg); padding:8px 12px; border-radius:10px; text-align:center}
+
+.kur-kutu{background:var(--lacivert-koyu); color:#E7ECFB; border-radius:10px; padding:12px 14px; font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.5; word-break:break-all; position:relative}
+.kur-kutu .kopyala{position:absolute; top:8px; right:8px; font-size:11px; padding:4px 9px; border-radius:7px; border:0; background:#2A3A6E; color:#fff; cursor:pointer}
+.kur-kutu .not{display:block; margin-top:8px; color:#9DB0E8}
+
+.bos-mesaj{display:none; text-align:center; color:var(--soluk); padding:60px 0}
+.bos-mesaj.goster{display:block}
+
+.ekip{display:none; margin:52px 0 0; text-align:center}
+.ekip.goster{display:block}
+.ekip h2{font-size:24px; color:var(--lacivert); margin:0 0 6px}
+.ekip p{color:var(--soluk); margin:0 0 22px}
+.avatarlar{display:flex; flex-wrap:wrap; justify-content:center; gap:18px 22px}
+.kisi{display:flex; flex-direction:column; align-items:center; gap:7px; text-decoration:none; width:86px; transition:transform .18s}
+.kisi:hover{transform:translateY(-3px)}
+.kisi img{width:64px; height:64px; border-radius:50%; border:2.5px solid var(--cizgi); background:var(--kagit)}
+.kisi:hover img{border-color:var(--lacivert)}
+.kisi span{font-size:12px; font-weight:600; color:var(--murekkep); max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.kisi b{font-size:11px; font-weight:600; color:var(--soluk)}
+
+.katki{position:relative; overflow:hidden; background:var(--lacivert); color:#fff; border-radius:22px; padding:52px 32px; text-align:center; margin:56px 0 0}
+.katki::before{content:""; position:absolute; inset:0; opacity:.14; background-image:radial-gradient(circle at 1px 1px, #fff 1.2px, transparent 0); background-size:26px 26px}
+.katki h2{position:relative; font-size:28px; margin:0 0 10px; color:#fff}
+.katki p{position:relative; max-width:60ch; margin:0 auto 24px; color:#C4CCE8}
+.katki .dugme.dolu{background:#fff; color:var(--lacivert); box-shadow:none}
+.katki .dugme.dolu:hover{background:var(--mavi-acik)}
+
+footer{border-top:1px solid var(--cizgi); background:var(--kagit); padding:30px 24px; margin-top:60px}
+.alt-ic{max-width:1080px; margin:0 auto; display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:space-between; font-size:13.5px; color:var(--soluk)}
+.alt-ic a{color:var(--lacivert); font-weight:600; text-decoration:none}
+.alt-ic a:hover{text-decoration:underline}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important} .kart{opacity:1; transform:none} html{scroll-behavior:auto}}
+@media (max-width:640px){.hero-ic{padding:60px 20px 58px} .sayilar{gap:24px} .ustbar nav a:not(.birincil){display:none}}
+</style>
+</head>
+<body>
+
+<header class="ustbar">
+  <a class="marka" href="#">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="38" cy="50" r="20" fill="#1C2957"/><circle cx="72" cy="38" r="9" fill="#1C2957"/><circle cx="70" cy="68" r="6" fill="#1C2957"/><rect x="50" y="44" width="26" height="9" rx="4.5" fill="#1C2957" transform="rotate(-14 50 44)"/></svg>
+    TÜGA Siber Güvenlik
+  </a>
+  <nav>
+    <a href="#lablar">Laboratuvarlar</a>
+    <a href="https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/blob/main/CONTRIBUTING.md">Lab Ekle</a>
+    <a class="birincil" href="https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari">⭐ GitHub</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <canvas id="ag" aria-hidden="true"></canvas>
+  <div class="hero-ic">
+    <span class="rozet-ust">🚩 Uygulamalı & Senaryolu Lab'lar</span>
+    <h1>TÜGA CTF<br><span class="vurgu">Laboratuvarları</span></h1>
+    <p class="alt">Senaryolu, Docker ile tek komutta lokalde ayağa kalkan Türkçe siber güvenlik lab'ları. Her lab en az 2 farklı zafiyet ve 2 flag içerir. İndir, çöz, flag'ini burada doğrula.</p>
+    <div class="sayilar">
+      <div class="sayi"><b>1</b><span>laboratuvar</span></div>
+      <div class="sayi"><b>1</b><span>alan</span></div>
+      <div class="sayi"><b>2</b><span>flag</span></div>
+    </div>
+    <div class="cta">
+      <a class="dugme dolu" href="#lablar">Laboratuvarlara Göz At</a>
+      <a class="dugme bos" href="https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/blob/main/CONTRIBUTING.md">Kendi Lab'ını Ekle →</a>
+    </div>
+  </div>
+</section>
+
+<div class="arac" id="lablar">
+  <div class="arama-kutu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.4-3.4"/></svg>
+    <input id="arama" type="search" placeholder="Lab ara: IDOR, SSTI, ağ, OSINT, senaryo…" aria-label="Laboratuvarlarda ara">
+  </div>
+  <div class="filtre-satir" id="alan-filtre">
+    <span class="etiket-baslik">Alan</span>
+    <button class="cip secili" data-tur="alan" data-deger="tum">Tümü</button>
+    <button class="cip" data-tur="alan" data-deger="Web">🕸️ Web <b>1</b></button>
+  </div>
+  <div class="filtre-satir" id="zorluk-filtre">
+    <span class="etiket-baslik">Zorluk</span>
+    <button class="cip secili" data-tur="zorluk" data-deger="tum">Tümü</button>
+    <button class="cip" data-tur="zorluk" data-deger="Kolay">Kolay <b>1</b></button>
+  </div>
+</div>
+
+<main>
+  <div class="izgara" id="izgara">
+    <article class="kart" data-alan="Web" data-zorluk="Kolay" data-slug="sablon-lab" data-ara="tüga i̇ç portalı tüga&#x27;nın küçük bir iç personel portalı. herkesin notları ve bir de &quot;selamlama&quot; özelliği var. portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini sömürünce bir flag açığa çıkıyor. amacın: yetkin olmayan yerlere ulaşmak.
+ web kolay idor ssti flask web idor — yetkisiz nesne erişimi (başkasının notunu okuma) ssti — jinja2 sunucu taraflı şablon enjeksiyonu">
+  <div class="kart-ust">
+    <span class="rozet-alan">🕸️ Web</span>
+    <span class="rozet-zor zor-kolay">Kolay</span>
+    <span class="rozet-sablon">📘 ŞABLON — kopyala</span>
+  </div>
+  <h3>TÜGA İç Portalı</h3>
+  <p class="senaryo">TÜGA&#x27;nın küçük bir iç personel portalı. Herkesin notları ve bir de &quot;selamlama&quot; özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini sömürünce bir flag açığa çıkıyor. Amacın: yetkin olmayan yerlere ulaşmak.</p>
+  <details class="zaf"><summary>2 zafiyet · 2 flag</summary><ul><li>IDOR — yetkisiz nesne erişimi (başkasının notunu okuma)</li><li>SSTI — Jinja2 sunucu taraflı şablon enjeksiyonu</li></ul></details>
+  <div class="etiketler"><span class="etiket">idor</span><span class="etiket">ssti</span><span class="etiket">flask</span><span class="etiket">web</span></div>
+  <div class="yazar">👤 <a href="https://github.com/fevziegeyurtsevenler" target="_blank" rel="noopener">fevziegeyurtsevenler</a></div>
+  <div class="kart-alt">
+    <button class="btn kur-btn" data-kur="git clone --depth 1 --filter=blob:none --sparse https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari.git &amp;&amp; cd tuga-ctf-laboratuvarlari &amp;&amp; git sparse-checkout set labs/sablon-lab &amp;&amp; cd labs/sablon-lab &amp;&amp; docker compose up -d --build" data-port="8080">▶ Kurulum komutu</button>
+    <button class="btn bayrak-btn" data-slug="sablon-lab">🚩 Flag gir</button>
+  </div>
+  <div class="bayrak-panel" data-slug="sablon-lab" hidden></div>
+</article>
+  </div>
+  <p class="bos-mesaj" id="bos">Aramanla eşleşen laboratuvar bulunamadı.</p>
+
+  <section class="ekip" id="katkicilar">
+    <h2>👥 Lab Geliştirenler</h2>
+    <p>Bu dizini pull request'leriyle büyüten herkes:</p>
+    <div class="avatarlar" id="avatarlar"></div>
+  </section>
+
+  <div class="katki">
+    <h2>Kendi lab'ını ekle 🚩</h2>
+    <p>Bir alan seç, hayal gücüne dayalı bir senaryo kur, Docker ile paketleyip pull request at. En az 2 farklı zafiyet + 2 flag — gerisini otomasyon halleder.</p>
+    <a class="dugme dolu" href="https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/blob/main/CONTRIBUTING.md">Katkı Rehberi</a>
+  </div>
+</main>
+
+<footer>
+  <div class="alt-ic">
+    <span>© TÜGA Siber Güvenlik Komitesi · içerik <a href="https://creativecommons.org/licenses/by/4.0/deed.tr">CC BY 4.0</a> · güncelleme 12.09.2026</span>
+    <span>Komite Başkanı: <a href="https://www.linkedin.com/in/fevziege/">Fevzi Ege Yurtsevenler</a></span>
+  </div>
+</footer>
+
+<script>window.FLAG_VERI = {"sablon-lab": [{"ipucu": "Notlar sıralı id ile geliyor. Ya kendine ait olmayan bir id istersen?", "h": "609f611b3ca5137f9331a44b680f12c207a8c7b15bc00b2c0771572f1580cb77"}, {"ipucu": "Selamlama girdini şablon motoruna sokabilir misin? {{7*7}} dene.", "h": "8acb1d84036e23f113dd83789057bc4b8078373ea2c69e9f64419b00b8096e08"}]};</script>
+<script>
+/* ---- ağ animasyonu ---- */
+(function(){
+  const c=document.getElementById('ag'); if(!c) return; const ctx=c.getContext('2d');
+  const azHareket=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR=Math.min(devicePixelRatio||1,1.5);
+  let W,H,noktalar=[],calisiyor=false,gorunur=true;
+  function kur(){
+    W=c.width=c.offsetWidth*DPR; H=c.height=c.offsetHeight*DPR;
+    const n=Math.min(50,Math.floor(c.offsetWidth/24));
+    noktalar=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.25*DPR,vy:(Math.random()-.5)*.25*DPR,r:(Math.random()*2.4+1.1)*DPR}));
+  }
+  const MENZIL=125*DPR, MENZIL2=MENZIL*MENZIL;
+  function ciz(){
+    ctx.clearRect(0,0,W,H); ctx.lineWidth=DPR*.8;
+    for(let i=0;i<noktalar.length;i++){const a=noktalar[i];
+      for(let j=i+1;j<noktalar.length;j++){const b=noktalar[j],dx=a.x-b.x;
+        if(dx>MENZIL||dx<-MENZIL)continue; const dy=a.y-b.y,d2=dx*dx+dy*dy;
+        if(d2<MENZIL2){ctx.globalAlpha=.34*(1-d2/MENZIL2); ctx.strokeStyle='#A3ACC7';
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+    ctx.globalAlpha=.55; ctx.fillStyle='#1C2957';
+    for(const p of noktalar){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();}
+    ctx.globalAlpha=1;
+  }
+  function adim(){ if(!gorunur){calisiyor=false;return;}
+    for(const p of noktalar){p.x+=p.vx;p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;}
+    ciz(); requestAnimationFrame(adim); }
+  function baslat(){ if(!calisiyor&&!azHareket){calisiyor=true;requestAnimationFrame(adim);} }
+  kur(); azHareket?ciz():baslat();
+  new IntersectionObserver(e=>{gorunur=e[0].isIntersecting; if(gorunur)baslat();}).observe(c);
+  addEventListener('resize',()=>{kur(); if(azHareket)ciz();});
+})();
+
+/* ---- kart görünme ---- */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('gorunur');io.unobserve(e.target);}
+  }),{rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.kart').forEach(k=>io.observe(k));
+})();
+
+/* ---- katkıcılar ---- */
+(function(){
+  fetch('https://api.github.com/repos/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/commits?per_page=100')
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(commitler=>{
+      const kisiler=new Map();
+      for(const c of commitler){const a=c.author; if(!a||a.type!=='User')continue;
+        const k=kisiler.get(a.login)||{login:a.login,avatar:a.avatar_url,url:a.html_url,sayi:0};
+        k.sayi++; kisiler.set(a.login,k);}
+      const kutu=document.getElementById('avatarlar');
+      [...kisiler.values()].sort((a,b)=>b.sayi-a.sayi).forEach(k=>{
+        const a=document.createElement('a'); a.className='kisi'; a.href=k.url; a.target='_blank'; a.rel='noopener';
+        a.innerHTML='<img loading="lazy" alt="'+k.login+'" src="'+k.avatar+'&s=128"><span>'+k.login+'</span><b>'+k.sayi+' katkı</b>';
+        kutu.appendChild(a);});
+      if(kutu.children.length)document.getElementById('katkicilar').classList.add('goster');
+    }).catch(()=>{});
+})();
+
+/* ---- arama + alan/zorluk filtresi ---- */
+(function(){
+  const arama=document.getElementById('arama');
+  const kartlar=[...document.querySelectorAll('.kart')];
+  const bos=document.getElementById('bos');
+  const secim={alan:'tum', zorluk:'tum'};
+  function uygula(){
+    const q=arama.value.trim().toLocaleLowerCase('tr');
+    let gorunen=0;
+    for(const k of kartlar){
+      const alanUydu=(secim.alan==='tum'||k.dataset.alan===secim.alan);
+      const zorUydu=(secim.zorluk==='tum'||k.dataset.zorluk===secim.zorluk);
+      const araUydu=(!q||k.dataset.ara.includes(q));
+      const uydu=alanUydu&&zorUydu&&araUydu;
+      k.style.display=uydu?'':'none';
+      if(uydu){gorunen++;k.classList.add('gorunur');}
+    }
+    bos.classList.toggle('goster',gorunen===0);
+  }
+  arama.addEventListener('input',uygula);
+  document.querySelectorAll('.cip').forEach(c=>c.addEventListener('click',()=>{
+    const tur=c.dataset.tur;
+    secim[tur]=c.dataset.deger;
+    document.querySelectorAll('.cip[data-tur="'+tur+'"]').forEach(x=>x.classList.toggle('secili',x===c));
+    uygula();
+  }));
+})();
+
+/* ---- kurulum komutu kopyalama ---- */
+(function(){
+  document.querySelectorAll('.kur-btn').forEach(b=>b.addEventListener('click',()=>{
+    const kart=b.closest('.kart');
+    let kutu=kart.querySelector('.kur-kutu');
+    if(kutu){kutu.remove(); return;}
+    const panel=kart.querySelector('.bayrak-panel');
+    kutu=document.createElement('div'); kutu.className='kur-kutu';
+    kutu.innerHTML='<button class="kopyala">kopyala</button>'+b.dataset.kur+
+      '<span class="not">↳ hazır olunca: http://localhost:'+b.dataset.port+'</span>';
+    kart.insertBefore(kutu, panel);
+    kutu.querySelector('.kopyala').addEventListener('click',ev=>{
+      ev.stopPropagation();
+      navigator.clipboard.writeText(b.dataset.kur).then(()=>{
+        const btn=kutu.querySelector('.kopyala'); btn.textContent='kopyalandı ✓';
+        setTimeout(()=>btn.textContent='kopyala',1500);
+      }).catch(()=>{});
+    });
+  }));
+})();
+
+/* ---- flag doğrulama (tarayıcıda sha256, sunucu yok) ---- */
+(function(){
+  async function sha256(metin){
+    const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(metin));
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  function cozulduYukle(slug){
+    try{return JSON.parse(localStorage.getItem('tuga-lab-'+slug)||'[]');}catch(e){return [];}
+  }
+  function cozulduKaydet(slug,arr){ try{localStorage.setItem('tuga-lab-'+slug,JSON.stringify([...new Set(arr)]));}catch(e){} }
+
+  document.querySelectorAll('.bayrak-btn').forEach(b=>b.addEventListener('click',()=>{
+    const slug=b.dataset.slug;
+    const panel=document.querySelector('.bayrak-panel[data-slug="'+CSS.escape(slug)+'"]');
+    if(!panel.hidden){panel.hidden=true; return;}
+    panel.hidden=false;
+    if(panel.dataset.kuruldu) return;
+    panel.dataset.kuruldu='1';
+    const flagler=(window.FLAG_VERI&&window.FLAG_VERI[slug])||[];
+    const cozuldu=cozulduYukle(slug);
+    flagler.forEach((f,i)=>{
+      const satir=document.createElement('div'); satir.className='bayrak-satir';
+      satir.innerHTML='<label>🚩 Flag '+(i+1)+' — <span style="color:var(--soluk)">'+
+        (f.ipucu||'').replace(/</g,'&lt;')+'</span></label>'+
+        '<div class="bayrak-giris"><input type="text" placeholder="TUGA{...}" autocomplete="off" spellcheck="false">'+
+        '<span class="durum"></span></div>';
+      panel.appendChild(satir);
+      const input=satir.querySelector('input'), durum=satir.querySelector('.durum');
+      if(cozuldu.includes(i)){input.value='✓ çözüldü'; input.disabled=true; input.classList.add('dogru'); durum.textContent='✅';}
+      let zaman;
+      input.addEventListener('input',()=>{
+        clearTimeout(zaman); const deger=input.value.trim();
+        input.classList.remove('dogru','yanlis'); durum.textContent='';
+        if(!deger) return;
+        zaman=setTimeout(async()=>{
+          const h=await sha256(deger);
+          if(h===f.h){input.classList.add('dogru'); durum.textContent='✅';
+            const c=cozulduYukle(slug); c.push(i); cozulduKaydet(slug,c); ozet();}
+          else{input.classList.add('yanlis'); durum.textContent='❌';}
+        },250);
+      });
+    });
+    const ozetKutu=document.createElement('div'); panel.appendChild(ozetKutu);
+    function ozet(){
+      const c=cozulduYukle(slug);
+      ozetKutu.innerHTML = (flagler.length && c.length>=flagler.length)
+        ? '<div class="hepsi-tamam">🎉 Tüm flag\'ler doğru — lab tamamlandı!</div>' : '';
+    }
+    ozet();
+  }));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Tek servislik en sade kurulum. `docker compose up -d --build` ile ayağa kalkar.
+# Kendi labında birden fazla servis (ör. db + web) tanımlayabilirsin.
+services:
+  portal:
+    build: .
+    container_name: tuga-sablon-lab
+    ports:
+      - "8080:8080"   # http://localhost:8080
+    restart: unless-stopped

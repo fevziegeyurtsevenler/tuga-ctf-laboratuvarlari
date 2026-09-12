@@ -1,0 +1,16 @@
+name: 🐞 Lab Sorunu
+description: Bir lab ayağa kalkmıyor / bozuk / flag doğrulanmıyor
+title: "[Sorun] "
+labels: ["sorun"]
+body:
+  - type: input
+    id: lab
+    attributes: {label: Hangi lab (klasör adı)}
+    validations: {required: true}
+  - type: textarea
+    id: sorun
+    attributes: {label: Ne oldu?, placeholder: "docker compose up sırasında ... hatası"}
+    validations: {required: true}
+  - type: input
+    id: ortam
+    attributes: {label: Ortam, placeholder: "macOS 15 / Docker Desktop 4.x"}

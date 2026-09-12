@@ -1,0 +1,24 @@
+# ── TÜGA CTF Laboratuvarı — meta dosyası ──────────────────────────────
+# Bu dosya katalog sitesinin tek doğruluk kaynağıdır. Her PR'da doldurulur.
+# Zorunlu alanlar: slug, baslik, alan, zorluk, yazar, senaryo, zafiyetler(≥2), flaglar(≥2), port
+slug: sablon-lab                 # klasör adıyla AYNI olmalı
+baslik: "TÜGA İç Portalı"
+alan: Web                        # Web | Ağ | OSINT | Binary/Pwn | Tersine Mühendislik | Kripto | Adli Bilişim | AI Güvenliği | Diğer
+zorluk: Kolay                    # Kolay | Orta | Zor
+yazar: fevziegeyurtsevenler      # GitHub kullanıcı adın
+sablon: true                     # SADECE bu şablon için true; kendi labında bu satırı SİL
+senaryo: >
+  TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de
+  "selamlama" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti
+  gizli; her birini sömürünce bir flag açığa çıkıyor. Amacın: yetkin olmayan
+  yerlere ulaşmak.
+zafiyetler:                      # en az 2 FARKLI zafiyet
+  - "IDOR — yetkisiz nesne erişimi (başkasının notunu okuma)"
+  - "SSTI — Jinja2 sunucu taraflı şablon enjeksiyonu"
+flaglar:                         # en az 2 flag; SADECE sha256 hash yazılır, düz metin ASLA
+  - ipucu: "Notlar sıralı id ile geliyor. Ya kendine ait olmayan bir id istersen?"
+    sha256: "609f611b3ca5137f9331a44b680f12c207a8c7b15bc00b2c0771572f1580cb77"
+  - ipucu: "Selamlama girdini şablon motoruna sokabilir misin? {{7*7}} dene."
+    sha256: "8acb1d84036e23f113dd83789057bc4b8078373ea2c69e9f64419b00b8096e08"
+port: 8080                       # docker compose ile açılan ana port (http://localhost:PORT)
+etiketler: [idor, ssti, flask, web]   # opsiyonel; sitede küçük rozetler

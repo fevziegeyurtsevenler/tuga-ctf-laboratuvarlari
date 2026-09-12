@@ -1,0 +1,28 @@
+name: 🚩 Lab Doğrulama
+
+on:
+  pull_request:
+    paths: ["labs/**"]
+  workflow_dispatch:
+
+jobs:
+  dogrula:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PyYAML kur
+        run: pip install pyyaml
+      - name: lab.yml sözleşmesini denetle
+        run: python3 scripts/lab_dogrula.py
+      - name: docker compose yapısını denetle (kod çalıştırmadan)
+        run: |
+          durum=0
+          for f in labs/*/docker-compose.yml labs/*/compose.yml labs/*/docker-compose.yaml labs/*/compose.yaml; do
+            [ -e "$f" ] || continue
+            echo "» $f"
+            docker compose -f "$f" config -q || durum=1
+          done
+          exit $durum

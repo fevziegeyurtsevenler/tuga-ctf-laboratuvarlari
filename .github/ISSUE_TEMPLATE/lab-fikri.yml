@@ -1,0 +1,27 @@
+name: 💡 Lab Fikri
+description: Bir lab senaryosu öner (henüz kod yazmadan)
+title: "[Lab Fikri] "
+labels: ["lab-fikri"]
+body:
+  - type: input
+    id: baslik
+    attributes: {label: Lab başlığı / kısa ad}
+    validations: {required: true}
+  - type: dropdown
+    id: alan
+    attributes:
+      label: Alan
+      options: [Web, Ağ, OSINT, Binary/Pwn, Tersine Mühendislik, Kripto, Adli Bilişim, AI Güvenliği, Diğer]
+    validations: {required: true}
+  - type: dropdown
+    id: zorluk
+    attributes: {label: Zorluk, options: [Kolay, Orta, Zor]}
+    validations: {required: true}
+  - type: textarea
+    id: senaryo
+    attributes: {label: Senaryo, placeholder: "Hayal gücüne dayalı kısa kurgu"}
+    validations: {required: true}
+  - type: textarea
+    id: zafiyetler
+    attributes: {label: Planlanan 2 zafiyet + 2 flag, placeholder: "1) IDOR → flag başka kullanıcının notunda ..."}
+    validations: {required: true}

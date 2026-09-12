@@ -1,0 +1,30 @@
+name: 🌐 Siteyi Güncelle
+
+on:
+  push:
+    branches: [main]
+    paths: ["labs/**", "docs/sablon.html", "scripts/site_uret.py"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  uret:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PyYAML kur
+        run: pip install pyyaml
+      - name: Siteyi üret
+        run: python3 scripts/site_uret.py
+      - name: Değişiklikleri commit'le
+        run: |
+          git config user.name "tuga-bot"
+          git config user.email "actions@github.com"
+          git add README.md docs/
+          git diff --cached --quiet || git commit -m "site: lab kataloğundan yeniden üretildi [skip ci]"
+          git push
