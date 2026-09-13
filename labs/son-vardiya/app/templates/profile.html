@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Profilim - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">Profilim</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Hesabım</div>
+        <h1>Profilim</h1>
+        <p class="subtitle">Kurumsal bilgileriniz. Bu sayfa salt okunurdur; güncelleme için İK ile iletişime geçin.</p>
+    </div>
+    {% if row %}
+    <div class="profile-grid">
+        <div class="profile-field"><div class="label">Ad Soyad</div><div class="value">{{ row['name'] }}</div></div>
+        <div class="profile-field"><div class="label">Kullanıcı Adı</div><div class="value">{{ row['username'] }}</div></div>
+        <div class="profile-field"><div class="label">Departman</div><div class="value">{{ row['department'] }}</div></div>
+        <div class="profile-field"><div class="label">Görev</div><div class="value">{{ row['role'] }}</div></div>
+        <div class="profile-field"><div class="label">Dahili Numara</div><div class="value">{{ row['internal_ext'] }}</div></div>
+        <div class="profile-field"><div class="label">Kurumsal E-posta</div><div class="value">{{ row['email'] }}</div></div>
+        <div class="profile-field"><div class="label">Hesap Durumu</div><div class="value"><span class="badge ok">{{ row['status'] }}</span></div></div>
+    </div>
+    {% else %}
+    <p class="subtitle">Profil bilgisi bulunamadı.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Arşiv Kaydı - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">Kısıtlı Arşiv</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Kısıtlı Arşiv</div>
+        <h1>Arşiv Kaydı</h1>
+    </div>
+    {% if error %}
+        <div class="error">{{ error }}</div>
+        <a class="back-link" href="{{ url_for('documents') }}">← Arşive dön</a>
+    {% elif record %}
+        <div class="doc-meta"><span class="badge">Referans: {{ record['code'] }}</span></div>
+        <h2>{{ record['title'] }}</h2>
+        <div class="doc-content">{{ record['content'] }}</div>
+        <a class="back-link" href="{{ url_for('documents') }}">← Arşive dön</a>
+    {% endif %}
+</div>
+{% endblock %}
