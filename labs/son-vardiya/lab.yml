@@ -1,0 +1,20 @@
+slug: son-vardiya
+baslik: "Son Vardiya"
+alan: Web
+zorluk: Orta
+yazar: YusufB-8
+senaryo: >
+  NovaSis Teknoloji A.Ş. ofisine gelen çalışanlar Genel Müdür Ahmet Yılmaz'ı bulamaz;
+  masasındaki telefonda 112'yi aramaya çalışırken kesilmiş bir çağrı kaydı vardır.
+  Oyuncu, şirketin dahili Personel Portalı üzerinden olayı araştırır ve son vardiyada
+  neler yaşandığını ortaya çıkarır.
+zafiyetler:
+  - "SQL Injection (Union-based) — /search personel arama endpoint'i"
+  - "IDOR / Broken Object Level Authorization — /documents/view doküman görüntüleme endpoint'i"
+flaglar:
+  - ipucu: "Personel arama sonucunda normalde gösterilmeyen bir sütunu UNION-based SQLi ile açığa çıkar."
+    sha256: "1a595ff5111c2455a03d435cc574369843167753fe731c7beb3f2a0c2466df5f"
+  - ipucu: "IDOR ile ulaşılan kamera görüntüsünü dikkatle incele; görüntüdeki bir referans kısıtlı arşiv kaydına götürür."
+    sha256: "c3412a538ae0a8bfe99df458c8c03b7b770a5e49848ba7210e1974bd0874acaa"
+port: 5001
+etiketler: [web, sqli, idor]
