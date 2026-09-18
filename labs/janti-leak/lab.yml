@@ -1,0 +1,21 @@
+slug: janti-leak
+baslik: "JANTİ: Korsan Sızıntısı"
+alan: "OSINT"
+zorluk: Kolay
+yazar: SidikaEtci
+senaryo: "Yeni müzik grubu JANTİ'nin kariyer parçası, resmi çıkışına sadece 3 gün kala korsan müzik portalı Spotifly'a sızdırıldı. Şüpheler rakip grubun bilgisayar mühendisine çevrildi. Sızdırılan ses dalgalarındaki izleri takip edin, gizli kulis sayfasına sızın ve elde edilen fotoğrafın adli analizini yaparak sabotajcıyı ifşa edin."
+zafiyetler:
+  - "Audio Spectrogram Steganography (Ses Dalgalarında Frekans Gizleme)"
+  - "Image EXIF / Metadata Forensics (Görsel Katmanında Adli Bilişim İzi)"
+flaglar:
+  - ipucu: "İnsan kulağının duyamadığı üst frekanslarda gizlenmiş bir rota ve imza olabilir mi?"
+    sha256: "670b13d640236aeeff4334c9c72eefbcfe1bfe26be86be3d00160faad2343997"
+  - ipucu: "Kulis sayfasındaki güvenlik kamerası fotoğrafının pikselleri dışındaki alanlara baktın mı?"
+    sha256: "ef2c6e696328328dc8f20b3ea94e773ae6759c99ea9405d5440d9df8bc4fb943"
+port: 5000
+etiketler:
+  - steganography
+  - forensics
+  - audio
+  - exif
+  - flask

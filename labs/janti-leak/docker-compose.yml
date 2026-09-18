@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  janti-challenge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: janti_leak_ctf
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
