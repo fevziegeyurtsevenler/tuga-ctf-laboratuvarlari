@@ -2,7 +2,8 @@
 
 # DevPuan CTF - Çözüm ve Analiz (Writeup)
 
-> 💡 **Detaylı Analiz:** Bu projenin hikayeleştirilmiş sömürü adımları ve görsel destekli okuması için [Medium Makalemi Buradan Okuyabilirsiniz](#) *()*.
+> 💡 **Detaylı Analiz:** Bu projenin hikayeleştirilmiş sömürü adımları ve görsel destekli okuması için [Medium Makalemi Buradan Okuyabilirsiniz](https://bilalkalayci.medium.com/devpuan-ctf-detaylı-writeup-1d1b14a145c8).
+
 
 ---
 
