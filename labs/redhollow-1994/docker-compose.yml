@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  analyzer:
+    build: ./re
+    stdin_open: true
+    tty: true
+    working_dir: /challenge

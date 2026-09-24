@@ -1,0 +1,41 @@
+slug: redhollow-1994
+baslik: "Night Hatch — Redhollow 1994"
+alan: Adli Bilişim
+zorluk: Orta
+yazar: rplny
+senaryo: >
+  1994’te hiç açılmayan bir dinozor parkı. Dr. Lara Lock arşivi mühürlemeden
+  önce on iki iz bırakmış. Sen arşivcisin: istemci sızıntıları, stego,
+  OSINT ve tersine mühendislik karışık; aynı tür arka arkaya gelmez.
+zafiyetler:
+  - "İstemci tarafı bilgi sızıntısı (DOM, CSS, çerez)"
+  - "Steganografi ve metadata (ses spektrumu, EXIF)"
+  - "OSINT / dizin keşfi (açık kaynak, robots)"
+  - "Tersine mühendislik (ELF numune etiketleyici)"
+flaglar:
+  - ipucu: "Sayfanın kendi belgesi bazen tabeladan dürüsttür."
+    sha256: "1d0618ecb1e2b0c499be9033464b5ad1de38dcb16cce1dd4bbab90d5f9f15a20"
+  - ipucu: "Gişede ıslak bir kâğıt, sayıları harf sanır."
+    sha256: "3a13949ecec6a4ef935b0acdae597bd0f1a1269b36b2fb286eb40b46f10d6a8f"
+  - ipucu: "Üst bant boya değil; stil dosyasında durur."
+    sha256: "155c8d1cd6780ce7f5faa7b5846a5140d522e8dd25d28cbdc87f5d40d5112159"
+  - ipucu: "Yanlış raftaki kemik çizimin içine sıkışmış."
+    sha256: "21ed4458771e260c6cf31d85a7777962f31ac561b0e969a9f5379ded1a2ecd31"
+  - ipucu: "Son kare konuşur; başlık gürültüdür."
+    sha256: "e7d469d0f53791e7ac973a3871a3c0acd2593b64758317369c0c482b0da3a3fd"
+  - ipucu: "Işık düşünce tarayıcıda bir iz kalır."
+    sha256: "057c85a6d46c9caffd9cfaff8eef5aad85872551c9ec5a1dbdfe2d65fad8600c"
+  - ipucu: "Tezgâh altındaki last-call başka dilde."
+    sha256: "d1012c641cba30f6058db15fe466ac495db067c2f64508764832484d6b9ceeee"
+  - ipucu: "Kükreme kulakla bitmez; frekansa bak."
+    sha256: "073ecd1e1baf415b6797f37b6ced5cc4644b0f5ad450e0ef82768d3c0a8cc906"
+  - ipucu: "Lara açık kayıt bırakmıştı. Fotoğrafın notuna bak; yasak dizin de konuşur."
+    sha256: "294ea550ea4bc5f45d65d379bd21f02bc1fdde8cfd20d7126b8301e9c7f9d722"
+  - ipucu: "Numune etiketleyici kafeste uyanır."
+    sha256: "edf3a8186b00c07866768c4184612e788d10f07859b54656325dabb660404c73"
+  - ipucu: "Botların görmemesi gereken yol, yasağın kendisidir."
+    sha256: "87b8fa18123ef08acc6d5e4c80023d9968b93ed8320800f33e6cf6fa695a724c"
+  - ipucu: "İkinci katman aynı programda, daha derin bir kodla."
+    sha256: "fd4ac05ea7dba3d2ccf2b8485f9b2fe9a2a684faf5806b74401a38f4988ae3d5"
+port: 8080
+etiketler: [stego, osint, forensics, reverse, web, docker]

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>saha spektrum</title>
+  <style>
+    body { margin: 0; background: #0a0a0a; color: #cfc6b8; font-family: Georgia, serif; }
+    header { padding: 1rem 1.25rem; border-bottom: 1px solid #333; }
+    header a { color: #c45a1a; }
+    main { padding: 1rem; }
+    canvas {
+      width: 100%; max-width: 1100px; height: auto;
+      image-rendering: pixelated; background: #000; border: 1px solid #333;
+    }
+    .muted { color: #888; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">park</a>
+    <span class="muted"> · saha kaydı spektrum</span>
+  </header>
+  <main>
+    <p class="muted">Kaset frekans görüntüsü (linear, yüksek kontrast). Uygulama gerekmez.</p>
+    <canvas id="c" width="1600" height="320"></canvas>
+    <p id="durum" class="muted">yükleniyor…</p>
+  </main>
+  <script>
+    const WAV = "../assets/saha_kaydi_1994.wav";
+
+    function fft(re, im) {
+      const n = re.length;
+      for (let i = 1, j = 0; i < n; i++) {
+        let bit = n >> 1;
+        for (; j & bit; bit >>= 1) j ^= bit;
+        j ^= bit;
+        if (i < j) {
+          [re[i], re[j]] = [re[j], re[i]];
+          [im[i], im[j]] = [im[j], im[i]];
+        }
+      }
+      for (let len = 2; len <= n; len <<= 1) {
+        const ang = (-2 * Math.PI) / len;
+        const wlenRe = Math.cos(ang), wlenIm = Math.sin(ang);
+        for (let i = 0; i < n; i += len) {
+          let wRe = 1, wIm = 0;
+          for (let j = 0; j < len / 2; j++) {
+            const uRe = re[i + j], uIm = im[i + j];
+            const vRe = re[i + j + len / 2] * wRe - im[i + j + len / 2] * wIm;
+            const vIm = re[i + j + len / 2] * wIm + im[i + j + len / 2] * wRe;
+            re[i + j] = uRe + vRe;
+            im[i + j] = uIm + vIm;
+            re[i + j + len / 2] = uRe - vRe;
+            im[i + j + len / 2] = uIm - vIm;
+            const nWRe = wRe * wlenRe - wIm * wlenIm;
+            wIm = wRe * wlenIm + wIm * wlenRe;
+            wRe = nWRe;
+          }
+        }
+      }
+    }
+
+    async function main() {
+      const durum = document.getElementById("durum");
+      const canvas = document.getElementById("c");
+      const ctx = canvas.getContext("2d");
+      const buf = await fetch(WAV).then((r) => r.arrayBuffer());
+      const ac = new (window.AudioContext || window.webkitAudioContext)();
+      const audio = await ac.decodeAudioData(buf.slice(0));
+      const ch = audio.getChannelData(0);
+      const sr = audio.sampleRate;
+      const skip = Math.floor(sr * 1.7);
+      const data = ch.subarray(skip);
+
+      const nFFT = 4096;
+      const hop = 256;
+      const fLo = 3200, fHi = 12500;
+      const i0 = Math.floor((fLo / sr) * nFFT);
+      const i1 = Math.min(nFFT / 2, Math.floor((fHi / sr) * nFFT));
+      const band = i1 - i0;
+      const frames = Math.max(1, Math.floor((data.length - nFFT) / hop));
+      const mag = new Float32Array(band * frames);
+      const win = new Float32Array(nFFT);
+      for (let i = 0; i < nFFT; i++) win[i] = 0.5 * (1 - Math.cos((2 * Math.PI * i) / (nFFT - 1)));
+
+      for (let t = 0; t < frames; t++) {
+        const re = new Float32Array(nFFT);
+        const im = new Float32Array(nFFT);
+        const off = t * hop;
+        for (let i = 0; i < nFFT; i++) re[i] = (data[off + i] || 0) * win[i];
+        fft(re, im);
+        for (let k = i0; k < i1; k++) {
+          mag[(k - i0) * frames + t] = Math.hypot(re[k], im[k]);
+        }
+      }
+
+      const sorted = Float32Array.from(mag).sort();
+      const thr = sorted[Math.floor(sorted.length * 0.58)] || 0;
+      let max = 0;
+      for (let i = 0; i < mag.length; i++) {
+        mag[i] = Math.max(0, mag[i] - thr * 0.5);
+        if (mag[i] > max) max = mag[i];
+      }
+      max = max || 1;
+
+      const W = canvas.width, H = canvas.height;
+      const img = ctx.createImageData(W, H);
+      for (let y = 0; y < H; y++) {
+        const srcY = Math.floor(((H - 1 - y) / (H - 1)) * (band - 1));
+        for (let x = 0; x < W; x++) {
+          const srcX = Math.floor((x / (W - 1)) * (frames - 1));
+          let v = mag[srcY * frames + srcX] / max;
+          v = Math.pow(Math.min(1, v), 0.32);
+          const g = (v * 255) | 0;
+          const p = (y * W + x) * 4;
+          img.data[p] = img.data[p + 1] = img.data[p + 2] = g;
+          img.data[p + 3] = 255;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+      durum.textContent = "tamam";
+      ac.close();
+    }
+    main().catch((e) => {
+      document.getElementById("durum").textContent = "hata: " + e.message;
+    });
+  </script>
+</body>
+</html>
