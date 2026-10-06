@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-SNOW Intranet | Yönetim Paneli</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+        body { background: #f1f5f9; color: #1e293b; min-height: 100vh; }
+        
+        /* Sade Kurumsal Başlık */
+        header {
+            background: #0f172a;
+            color: #fff;
+            padding: 14px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0284c7;
+        }
+        .brand { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
+        .user-meta { font-size: 13px; color: #94a3b8; display: flex; align-items: center; gap: 14px; }
+        .user-meta strong { color: #f8fafc; }
+        .logout { color: #cbd5e1; text-decoration: none; font-size: 12px; border: 1px solid #334155; padding: 4px 10px; border-radius: 4px; }
+        .logout:hover { background: #334155; }
+
+        /* İçerik Alanı */
+        main { max-width: 960px; margin: 30px auto; padding: 0 20px; }
+        
+        .alert-success {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #065f46;
+            margin-bottom: 24px;
+            border-radius: 2px;
+        }
+
+        .section-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #334155; }
+
+        /* Gerçek Kurumsal Tablo */
+        .panel-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+        th { background: #f8fafc; border-bottom: 1px solid #cbd5e1; padding: 10px 14px; font-weight: 600; color: #475569; }
+        td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fafc; }
+
+        code.flag {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #0369a1;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">CYBER-SNOW INTRANET PORTALI</div>
+        <div class="user-meta">
+            <span>Aktif Oturum: <strong>{{ username }} (Sistem Yöneticisi)</strong></span>
+            <a href="/logout" class="logout">Güvenli Çıkış</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="alert-success">
+            Oturum doğrulandı. Yönetim veritabanına doğrudan erişim sağlandı.
+        </div>
+
+        <div class="section-title">Dahili Sistem Konfigürasyonu ve Gizli Notlar</div>
+        <div class="panel-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Anahtar (Key)</th>
+                        <th style="width: 25%;">Kategori</th>
+                        <th style="width: 50%;">Değer / Sistem Bayrağı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>SYS_AUTH_FLAG</code></td>
+                        <td>Güvenlik Doğrulama</td>
+                        <td><code class="flag">TUGA{sql_enjeksiyonu_ile_giris}</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>DB_ACCESS_MODE</code></td>
+                        <td>Veritabanı</td>
+                        <td>Tam Yetkili (Read/Write Bypass)</td>
+                    </tr>
+                    <tr>
+                        <td><code>ADMIN_SESSION_TOKEN</code></td>
+                        <td>Kimlik</td>
+                        <td><code>sess_99a8b71f0c2</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">Kayıtlı Dahili Personel</div>
+        <div class="panel-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kullanıcı Adı</th>
+                        <th>Rol</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>admin</td>
+                        <td>Root Administrator</td>
+                        <td><span style="color: #10b981; font-weight: 500;">Aktif</span></td>
+                    </tr>
+                    <tr>
+                        <td>personel_destek</td>
+                        <td>Yardım Masası</td>
+                        <td>Pasif</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>
