@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Duyurular - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">Duyurular</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">İç İletişim</div>
+        <h1>Duyurular</h1>
+        <p class="subtitle">Şirket genelindeki tüm duyurular.</p>
+    </div>
+
+    <div class="filter-bar">
+        <form method="GET" action="{{ url_for('announcements_list') }}">
+            <select name="category" onchange="this.form.submit()">
+                <option value="">Tüm Kategoriler</option>
+                {% for c in categories %}
+                <option value="{{ c }}" {% if c == selected %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="section-label">{{ announcements|length }} Duyuru</div>
+    {% for a in announcements %}
+    <div class="announcement">
+        <div class="announcement-title">{{ a['title'] }}</div>
+        <div class="announcement-body">{{ a['body'] }}</div>
+        <div class="announcement-meta"><span class="badge">{{ a['category'] }}</span>{{ a['posted_by'] }} · {{ a['posted_at'] }}</div>
+    </div>
+    {% else %}
+    <p class="subtitle">Bu kategoride duyuru bulunamadı.</p>
+    {% endfor %}
+</div>
+{% endblock %}

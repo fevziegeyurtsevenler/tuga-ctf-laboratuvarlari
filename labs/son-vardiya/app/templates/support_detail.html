@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Bilet #{{ ticket['ticket_no'] }} - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><a href="{{ url_for('support_list') }}">IT Destek</a><span class="sep">/</span><span class="current">Bilet #{{ ticket['ticket_no'] }}</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">IT Destek</div>
+        <h1>Bilet #{{ ticket['ticket_no'] }} — {{ ticket['subject'] }}</h1>
+    </div>
+    <div class="doc-meta">
+        <span class="badge">Kullanıcı: {{ ticket['requester_name'] }}</span>
+        <span class="badge">Öncelik: {{ ticket['priority'] }}</span>
+        {% if ticket['status'] == 'Kapalı' %}<span class="badge ok">{{ ticket['status'] }}</span>
+        {% elif ticket['status'] == 'İşlemde' %}<span class="badge warn">{{ ticket['status'] }}</span>
+        {% else %}<span class="badge info">{{ ticket['status'] }}</span>{% endif %}
+        <span class="badge">Açılış: {{ ticket['opened_at'] }}</span>
+        <span class="badge">Son Güncelleme: {{ ticket['updated_at'] }}</span>
+    </div>
+    <div class="doc-content">{{ ticket['description'] }}</div>
+    <a class="back-link" href="{{ url_for('support_list') }}">← IT Destek listesine dön</a>
+</div>
+{% endblock %}

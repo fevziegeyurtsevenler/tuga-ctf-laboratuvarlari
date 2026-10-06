@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}NovaSis Teknoloji - Dahili Portal{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23122320'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%2362c0b8' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E">
+<style>
+    :root {
+        --bg: #0b0e12;
+        --bg-grid: #0d1116;
+        --panel: #151920;
+        --panel-2: #10141a;
+        --panel-3: #0d1014;
+        --border: #242b35;
+        --border-soft: #1b212a;
+        --accent: #3fa7a0;
+        --accent-2: #62c0b8;
+        --accent-dim: rgba(63,167,160,.14);
+        --text: #eceff2;
+        --muted: #98a2ae;
+        --dim: #66707c;
+        --warn: #d9a53f;
+        --danger: #e2645f;
+        --ok: #3fbf8f;
+        --radius: 12px;
+        --radius-sm: 7px;
+        --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+        margin: 0;
+        font-family: var(--font);
+        background:
+            radial-gradient(circle at 18% -10%, rgba(63,167,160,.10), transparent 38%),
+            radial-gradient(circle at 100% 0%, rgba(98,192,184,.05), transparent 30%),
+            var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+    }
+    nav {
+        min-height: 60px;
+        background: rgba(16,20,26,.92);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px) saturate(140%);
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 10px 0; }
+    .brand-mark {
+        width: 30px; height: 30px; border-radius: 8px; flex: none;
+        background: linear-gradient(155deg, var(--accent) 0%, #1f6e68 100%);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 12px; color: #07110f; letter-spacing: .2px;
+        box-shadow: 0 4px 14px rgba(63,167,160,.28);
+    }
+    .brand-text { font-weight: 700; font-size: 14px; letter-spacing: .1px; line-height: 1.2; }
+    .brand-accent { color: var(--accent-2); }
+    .brand-sub { display: block; color: var(--dim); font-weight: 500; font-size: 10.5px; letter-spacing: .3px; text-transform: uppercase; margin-top: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 1px; flex-wrap: wrap; }
+    nav a.nav-link {
+        display: flex; align-items: center; gap: 6px;
+        color: var(--muted); text-decoration: none; font-size: 12.5px; font-weight: 500;
+        padding: 8px 10px; border-radius: 8px; transition: background .15s ease, color .15s ease;
+        white-space: nowrap;
+    }
+    nav a.nav-link svg { width: 14px; height: 14px; flex: none; opacity: .85; }
+    nav a.nav-link:hover { color: var(--text); background: #1a2028; }
+    nav a.nav-link.active { color: var(--accent-2); background: var(--accent-dim); }
+    nav a.nav-link.logout { margin-left: 4px; color: var(--dim); }
+    nav a.nav-link.logout:hover { color: var(--danger); background: rgba(226,100,95,.08); }
+    .container { width: min(960px, calc(100% - 32px)); margin: 40px auto 0; }
+    .panel {
+        background: linear-gradient(180deg, rgba(255,255,255,.012), transparent 40%), var(--panel);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 30px 34px;
+        box-shadow: 0 24px 60px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.02);
+    }
+    .breadcrumb { display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:12px; color:var(--dim); margin: 22px auto 0; width: min(960px, calc(100% - 32px)); }
+    .breadcrumb a { color: var(--dim); text-decoration:none; }
+    .breadcrumb a:hover { color: var(--accent-2); }
+    .breadcrumb .sep { color: var(--border); }
+    .breadcrumb .current { color: var(--muted); }
+    .page-head { margin-bottom: 24px; }
+    .eyebrow { color: var(--accent-2); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+    .eyebrow::before { content: ""; width: 14px; height: 1.5px; background: var(--accent-2); border-radius: 2px; }
+    h1 { font-size: 25px; line-height: 1.25; margin: 0 0 8px; letter-spacing: -.2px; }
+    h2 { font-size: 16.5px; margin: 0 0 8px; font-weight: 650; }
+    p.subtitle { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.6; }
+    .muted { color: var(--muted); }
+    .dim { color: var(--dim); }
+    form { margin-top: 18px; }
+    label { display: block; font-size: 11.5px; font-weight: 600; color: var(--muted); margin-bottom: 7px; text-transform: uppercase; letter-spacing: .4px; }
+    input[type=text], input[type=password], input[type=number], select {
+        width: 100%; padding: 11px 13px; background: var(--panel-3); border: 1px solid var(--border);
+        border-radius: var(--radius-sm); color: var(--text); font-size: 14px; outline: none; margin-bottom: 13px;
+        transition: border-color .15s ease, box-shadow .15s ease;
+        font-family: var(--font);
+    }
+    select { cursor: pointer; }
+    input::placeholder { color: var(--dim); }
+    input:focus, select:focus { border-color: rgba(63,167,160,.8); box-shadow: 0 0 0 3px var(--accent-dim); }
+    button, .button {
+        display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        background: linear-gradient(155deg, var(--accent-2), var(--accent));
+        color: #06110f; border: 0; padding: 11px 18px;
+        border-radius: var(--radius-sm); font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: none;
+        transition: filter .15s ease, transform .1s ease;
+    }
+    button:hover, .button:hover { filter: brightness(1.08); }
+    button:active, .button:active { transform: translateY(1px); }
+    .button.secondary { background: #1b212a; color: var(--text); border: 1px solid var(--border); }
+    .error {
+        background: rgba(226,100,95,.1); border: 1px solid rgba(226,100,95,.32); color: #ff9a95;
+        padding: 12px 14px; border-radius: var(--radius-sm); font-size: 13px; margin: 16px 0;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .success-note {
+        background: var(--accent-dim); border: 1px solid rgba(63,167,160,.28); color: var(--muted);
+        padding: 12px 14px; border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.5;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13.5px; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border-soft); }
+    th { color: var(--dim); font-weight: 650; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    td { color: var(--text); }
+    tbody tr { transition: background .12s ease; }
+    tbody tr:hover { background: rgba(255,255,255,.018); }
+    a { color: var(--accent-2); }
+    code { font-family: "SF Mono", Consolas, "Courier New", monospace; background: var(--panel-3); border: 1px solid var(--border-soft); border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--accent-2); }
+    .section-label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 28px 0 12px; font-weight: 700; }
+    .incident-alert { border: 1px solid rgba(217,165,63,.38); border-left: 3px solid var(--warn); border-radius: 10px; padding: 16px 18px; background: rgba(217,165,63,.05); }
+    .incident-label { color: #e0b354; font-size: 11px; text-transform: uppercase; letter-spacing: .8px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+    .incident-body { color: var(--text); font-size: 13.5px; line-height: 1.65; }
+    .status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .status-item { background: var(--panel-2); border: 1px solid var(--border); border-radius: 9px; padding: 13px; }
+    .status-name { color: var(--muted); font-size: 11px; font-weight: 550; }
+    .status-value { font-size: 13px; font-weight: 650; margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; display: inline-block; }
+    .dot-ok { background: var(--ok); box-shadow: 0 0 0 3px rgba(63,191,143,.16); }
+    .dot-warn { background: var(--warn); box-shadow: 0 0 0 3px rgba(217,165,63,.16); }
+    .dot-off { background: var(--dim); box-shadow: 0 0 0 3px rgba(102,112,124,.14); }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+    .mini-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 15px 17px; }
+    .mini-card-label { color: var(--dim); font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; margin-bottom: 8px; }
+    .mini-card-value { font-size: 20px; font-weight: 700; }
+    .mini-card-sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .announcement { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 9px; padding: 15px 17px; margin-bottom: 10px; background: var(--panel-2); }
+    .announcement-title { font-weight: 650; font-size: 13.5px; margin-bottom: 6px; }
+    .announcement-body { color: var(--muted); font-size: 12.8px; line-height: 1.55; }
+    .announcement-meta { color: var(--dim); font-size: 11px; margin-top: 9px; letter-spacing: .2px; display:flex; gap:8px; align-items:center; }
+    .resource-links a { display:flex; justify-content:space-between; align-items: center; gap: 15px; padding: 11px 13px; background:var(--panel-2); border:1px solid var(--border); border-radius:8px; margin-bottom:8px; color:var(--muted); text-decoration:none; font-size:13px; transition: border-color .15s ease, color .15s ease; }
+    .resource-links a:hover { border-color:var(--accent); color:var(--text); }
+    .resource-links .meta { color:var(--dim); font-size:11px; }
+    .lookup-box { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 24px; }
+    .lookup-box form { display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:end; margin-top:14px; }
+    .lookup-box input { margin-bottom:0; }
+    .filter-bar { display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap; }
+    .filter-bar form { margin:0; display:flex; gap:10px; align-items:center; }
+    .filter-bar select { margin-bottom:0; min-width:180px; }
+    .doc-meta { display:flex; flex-wrap:wrap; gap:8px; margin: 8px 0 16px; }
+    .badge { display:inline-flex; align-items:center; gap: 5px; padding:5px 9px; border:1px solid var(--border); border-radius:999px; background:var(--panel-2); color:var(--muted); font-size:11px; font-weight: 550; }
+    .badge.ok { border-color: rgba(63,191,143,.35); color: #7fe0bb; }
+    .badge.warn { border-color: rgba(217,165,63,.35); color: #f0c674; }
+    .badge.info { border-color: rgba(63,167,160,.35); color: var(--accent-2); }
+    .doc-content { white-space: pre-wrap; background: var(--panel-3); border:1px solid var(--border); border-radius:9px; padding:17px; font-family: "SF Mono", Consolas, "Courier New", monospace; font-size:12.5px; line-height:1.7; margin-top:16px; }
+    .profile-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin-top: 10px; }
+    .profile-field { border-bottom: 1px solid var(--border-soft); padding-bottom: 10px; }
+    .profile-field .label { color: var(--dim); font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; margin-bottom: 5px; }
+    .profile-field .value { font-size: 14px; color: var(--text); }
+    .evidence-frame { margin-top: 18px; padding: 10px; background:var(--panel-3); border:1px solid var(--border); border-radius:10px; }
+    .evidence-frame img { display:block; width:100%; max-height:470px; object-fit:contain; border-radius:7px; cursor:zoom-in; }
+    .evidence-caption { display:flex; justify-content:space-between; gap:10px; margin-top:9px; color:var(--dim); font-size:11px; }
+    .modal { display:none; position:fixed; inset:0; z-index:100; background:rgba(4,6,8,.92); padding:30px; align-items:center; justify-content:center; backdrop-filter: blur(2px); }
+    .modal.open { display:flex; }
+    .modal img { max-width:96vw; max-height:92vh; object-fit:contain; border:1px solid var(--border); border-radius:9px; }
+    .modal-close { position:fixed; top:20px; right:26px; color:#fff; font-size:26px; cursor:pointer; line-height:1; opacity: .8; }
+    .modal-close:hover { opacity: 1; }
+    .back-link { margin-top:18px; display:inline-flex; align-items:center; gap:6px; font-size:13px; text-decoration:none; font-weight: 550; }
+    .login-shell { max-width: 420px; margin: 9vh auto 0; }
+    .login-mark { display:flex; align-items:center; gap:10px; color:var(--accent-2); font-size:12px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; margin-bottom:18px; }
+    .login-hint { margin-top:18px; padding-top:16px; border-top:1px solid var(--border-soft); color:var(--dim); font-size:11.5px; line-height:1.55; }
+    .site-footer { text-align:center; color:var(--dim); font-size:11px; letter-spacing:.2px; margin: 34px auto 40px; width: min(960px, calc(100% - 32px)); }
+    .footer-note { color:var(--dim); text-align:center; font-size:11px; margin-top:28px; }
+    @media (max-width: 720px) {
+        nav { padding: 0 16px; min-height: auto; align-items:flex-start; flex-direction:column; gap:6px; padding-top:12px; padding-bottom:10px; }
+        .brand { padding: 4px 0; }
+        .nav-links { flex-wrap:wrap; }
+        nav a.nav-link { padding:7px 9px; }
+        .container { width: min(100% - 22px, 960px); margin-top:24px; }
+        .breadcrumb { width: min(100% - 22px, 960px); }
+        .panel { padding:22px 18px; }
+        .status-grid { grid-template-columns: repeat(2, 1fr); }
+        .dashboard-grid { grid-template-columns: 1fr; }
+        .profile-grid { grid-template-columns: 1fr; }
+        .lookup-box form { grid-template-columns:1fr; }
+        .lookup-box button { width:100%; }
+        .filter-bar form { width:100%; flex-direction:column; align-items:stretch; }
+        .filter-bar select { min-width:0; }
+        .login-shell { margin-top: 6vh; }
+    }
+</style>
+</head>
+<body>
+<nav>
+    <div class="brand">
+        <div class="brand-mark">NS</div>
+        <div class="brand-text"><span class="brand-accent">NovaSis</span> Teknoloji A.Ş.<span class="brand-sub">Dahili Personel Portalı</span></div>
+    </div>
+    {% if session.get('username') %}
+    <div class="nav-links">
+        <a class="nav-link {% if request.endpoint == 'portal' %}active{% endif %}" href="{{ url_for('portal') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+            <span>Ana Sayfa</span>
+        </a>
+        <a class="nav-link {% if request.endpoint == 'search' %}active{% endif %}" href="{{ url_for('search') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span>Personel</span>
+        </a>
+        <a class="nav-link {% if request.endpoint in ['documents', 'document_view'] %}active{% endif %}" href="{{ url_for('documents') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l2-3h5l2 3h8a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/></svg>
+            <span>Doküman Arşivi</span>
+        </a>
+        <a class="nav-link {% if request.endpoint in ['support_list', 'support_detail'] %}active{% endif %}" href="{{ url_for('support_list') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+            <span>IT Destek</span>
+        </a>
+        <a class="nav-link {% if request.endpoint == 'announcements_list' %}active{% endif %}" href="{{ url_for('announcements_list') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M7 14v4a2 2 0 0 0 2 2h1"/></svg>
+            <span>Duyurular</span>
+        </a>
+        <a class="nav-link {% if request.endpoint == 'my_profile' %}active{% endif %}" href="{{ url_for('my_profile') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+            <span>Profilim</span>
+        </a>
+        <a class="nav-link {% if request.endpoint == 'system_status' %}active{% endif %}" href="{{ url_for('system_status') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span>Sistem</span>
+        </a>
+        <a class="nav-link logout" href="{{ url_for('logout') }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+            <span>Çıkış</span>
+        </a>
+    </div>
+    {% endif %}
+</nav>
+{% block breadcrumb %}{% endblock %}
+<div class="container{% if request.endpoint == 'login' %} login-shell{% endif %}">
+    {% block content %}{% endblock %}
+</div>
+{% if session.get('username') %}
+<div class="site-footer">NovaSis Teknoloji A.Ş. · Dahili Personel Portalı · Yalnızca iç kullanım içindir</div>
+{% endif %}
+</body>
+</html>

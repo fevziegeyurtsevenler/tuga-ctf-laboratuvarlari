@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Personel Dizini - NovaSis{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Personel</div>
+        <h1>Personel Dizini</h1>
+        <p class="subtitle">Şirket çalışanlarının temel kayıtlarını isme göre arayın.</p>
+    </div>
+    <form method="GET" action="{{ url_for('search') }}">
+        <label for="name">İsim veya soyisim</label>
+        <input type="text" id="name" name="name" value="{{ name or '' }}" placeholder="ör. Ahmet Yılmaz">
+        <button type="submit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            Personel Ara
+        </button>
+    </form>
+    {% if error %}<div class="error">Sorgu hatası: {{ error }}</div>{% endif %}
+    {% if results %}
+    <table>
+        <thead><tr><th>ID</th><th>İsim</th><th>Rol</th></tr></thead>
+        <tbody>{% for row in results %}<tr><td>{{ row[0] }}</td><td><a href="{{ url_for('employee_profile', employee_id=row[0]) }}">{{ row[1] }}</a></td><td>{{ row[2] }}</td></tr>{% endfor %}</tbody>
+    </table>
+    {% elif name %}<p class="subtitle" style="margin-top:18px;">Sonuç bulunamadı.</p>{% endif %}
+</div>
+{% endblock %}

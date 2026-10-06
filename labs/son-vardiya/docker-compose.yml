@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    ports:
+      # Sadece localhost'a bağlanır (127.0.0.1) - lab dışarıya (LAN/internet)
+      # açık bir saldırı yüzeyi oluşturmaz. Sadece bu makineden erişilebilir.
+      # Host tarafında 5001 kullanılıyor çünkü 5000 bazı Windows sistemlerinde
+      # başka bir servis (örn. Windows üzerindeki bir sistem servisi) tarafından
+      # kullanılabiliyor. Container içinde uygulama yine 5000'de dinler.
+      - "127.0.0.1:5001:5000"
+    volumes:
+      - lab-data:/data
+    restart: unless-stopped
+
+volumes:
+  lab-data:

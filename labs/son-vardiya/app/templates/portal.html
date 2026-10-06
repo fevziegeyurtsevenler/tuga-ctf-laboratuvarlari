@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Ana Sayfa - NovaSis{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Dahili Personel Portalı</div>
+        <h1>Hoş geldin, {{ display_name }}</h1>
+        <p class="subtitle">Şirket içi duyurular, çalışma kaynakları ve sistem bilgileri.</p>
+    </div>
+
+    <div class="incident-alert">
+        <div class="incident-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            Olağan Dışı Durum Bildirimi
+        </div>
+        <div class="incident-body">
+            Bu sabah şirket yöneticisi <strong>Ahmet Yılmaz</strong>'a ulaşılamadı. Ofisinde açık bırakılmış
+            bir telefon bulundu. Son çağrı kaydının 112 olduğu tespit edildi. Güvenlik ekibi konuyla ilgili
+            inceleme başlatmıştır; gelişmeler bu alandan paylaşılacaktır.
+        </div>
+    </div>
+
+    <div class="section-label">Hesap ve Destek Özeti</div>
+    <div class="dashboard-grid">
+        <div class="mini-card">
+            <div class="mini-card-label">Hesap Bilgisi</div>
+            {% if profile %}
+            <div class="mini-card-value">{{ profile['department'] }}</div>
+            <div class="mini-card-sub">{{ profile['role'] }} · <span class="badge ok">{{ profile['status'] }}</span></div>
+            {% else %}
+            <div class="mini-card-value">—</div>
+            <div class="mini-card-sub">Profil bilgisi bulunamadı.</div>
+            {% endif %}
+        </div>
+        <div class="mini-card">
+            <div class="mini-card-label">IT Destek</div>
+            <div class="mini-card-value">{{ open_tickets }} açık talep</div>
+            <div class="mini-card-sub"><a href="{{ url_for('support_list') }}">Tüm biletleri görüntüle →</a></div>
+        </div>
+    </div>
+
+    <div class="section-label">Sistem Durumu</div>
+    <div class="status-grid">
+        <div class="status-item"><div class="status-name">Personel Portalı</div><div class="status-value"><span class="dot dot-ok"></span>Aktif</div></div>
+        <div class="status-item"><div class="status-name">Doküman Arşivi</div><div class="status-value"><span class="dot dot-ok"></span>Aktif</div></div>
+        <div class="status-item"><div class="status-name">Bina Ağ Altyapısı</div><div class="status-value"><span class="dot dot-warn"></span>Kesinti Geçmişi</div></div>
+        <div class="status-item"><div class="status-name">Yedekleme Servisi</div><div class="status-value"><span class="dot dot-ok"></span>Aktif</div></div>
+    </div>
+    <p class="footer-note"><a href="{{ url_for('system_status') }}">Sistem durumunun ayrıntılarını görüntüle →</a></p>
+
+    <div class="section-label">Son Duyurular</div>
+    {% for a in announcements %}
+    <div class="announcement">
+        <div class="announcement-title">{{ a['title'] }}</div>
+        <div class="announcement-body">{{ a['body'] }}</div>
+        <div class="announcement-meta">{{ a['posted_by'] }} · {{ a['posted_at'] }}</div>
+    </div>
+    {% else %}
+    <p class="subtitle">Şu anda görüntülenecek duyuru yok.</p>
+    {% endfor %}
+    <p class="footer-note"><a href="{{ url_for('announcements_list') }}">Tüm duyuruları görüntüle →</a></p>
+
+    <div class="section-label">Son Erişilen Kaynaklar</div>
+    <div class="resource-links">
+        {% for doc in recent_docs %}
+        <a href="{{ url_for('document_view', id=doc['id']) }}"><span>{{ doc['title'] }}</span><span class="meta">Kayıt No: {{ doc['id'] }}</span></a>
+        {% else %}
+        <p class="subtitle">Henüz erişilen bir dokümanınız yok. Dokümanlarınızı Doküman Arşivi sayfasından görüntüleyebilirsiniz.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

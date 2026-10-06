@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}IT Destek - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">IT Destek</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">BT Destek Masası</div>
+        <h1>IT Destek</h1>
+        <p class="subtitle">Açık ve geçmiş destek taleplerinin listesi.</p>
+    </div>
+
+    <div class="filter-bar">
+        <form method="GET" action="{{ url_for('support_list') }}">
+            <select name="status" onchange="this.form.submit()">
+                <option value="">Tüm Durumlar</option>
+                {% for s in valid_statuses %}
+                <option value="{{ s }}" {% if s == selected %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    {% if tickets %}
+    <table>
+        <thead><tr><th>Bilet No</th><th>Kullanıcı</th><th>Konu</th><th>Öncelik</th><th>Durum</th><th>Son Güncelleme</th></tr></thead>
+        <tbody>
+        {% for t in tickets %}
+        <tr>
+            <td>#{{ t['ticket_no'] }}</td>
+            <td>{{ t['requester_name'] }}</td>
+            <td><a href="{{ url_for('support_detail', ticket_no=t['ticket_no']) }}">{{ t['subject'] }}</a></td>
+            <td>{{ t['priority'] }}</td>
+            <td>
+                {% if t['status'] == 'Kapalı' %}<span class="badge ok">{{ t['status'] }}</span>
+                {% elif t['status'] == 'İşlemde' %}<span class="badge warn">{{ t['status'] }}</span>
+                {% else %}<span class="badge info">{{ t['status'] }}</span>{% endif %}
+            </td>
+            <td class="dim">{{ t['updated_at'] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}<p class="subtitle">Bu durumda bilet bulunamadı.</p>{% endif %}
+</div>
+{% endblock %}

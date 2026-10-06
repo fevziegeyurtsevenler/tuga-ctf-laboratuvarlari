@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Doküman Arşivi - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">Doküman Arşivi</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Kaynak Yönetimi</div>
+        <h1>Doküman Arşivi</h1>
+        <p class="subtitle">Size atanmış dokümanlar ve kayıt numarası üzerinden belge erişimi.</p>
+    </div>
+
+    <div class="lookup-box">
+        <h2>Doküman Sorgulama</h2>
+        <p class="subtitle">Kayıt numarası bilinen bir dokümanı görüntülemek için numarayı girin.</p>
+        <form method="GET" action="{{ url_for('document_view') }}">
+            <div><label for="id">Kayıt No</label><input type="number" id="id" name="id" placeholder="ör. 1042" min="1" required></div>
+            <button type="submit">Görüntüle</button>
+        </form>
+    </div>
+
+    <div class="section-label">Size Atanmış Dokümanlar</div>
+    {% if docs %}
+    <table>
+        <thead><tr><th>Kayıt No</th><th>Kategori</th><th>Başlık</th><th>Son Güncelleme</th><th>Durum</th><th></th></tr></thead>
+        <tbody>
+        {% for doc in docs %}
+        <tr>
+            <td>{{ doc['id'] }}</td>
+            <td><span class="badge">{{ doc['category'] }}</span></td>
+            <td>{{ doc['title'] }}</td>
+            <td class="dim">{{ doc['updated_at'] }}</td>
+            <td>
+                {% if doc['status'] == 'Onaylandı' %}<span class="badge ok">{{ doc['status'] }}</span>
+                {% elif doc['status'] == 'İncelemede' %}<span class="badge warn">{{ doc['status'] }}</span>
+                {% else %}<span class="badge info">{{ doc['status'] }}</span>{% endif %}
+            </td>
+            <td><a href="{{ url_for('document_view', id=doc['id']) }}">Görüntüle →</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}<p class="subtitle">Henüz size atanmış bir doküman yok.</p>{% endif %}
+</div>
+{% endblock %}

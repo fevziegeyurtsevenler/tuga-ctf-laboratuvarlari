@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Doküman Görüntüle - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><a href="{{ url_for('documents') }}">Doküman Arşivi</a><span class="sep">/</span><span class="current">{% if doc %}{{ doc['title'] }}{% else %}Doküman{% endif %}</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">Doküman Arşivi</div>
+        <h1>Doküman Görüntüle</h1>
+    </div>
+    {% if error %}
+        <div class="error">{{ error }}</div>
+        <a class="back-link" href="{{ url_for('documents') }}">&larr; Arşive dön</a>
+    {% elif doc %}
+        <div class="doc-meta">
+            <span class="badge">Kayıt No: {{ doc['id'] }}</span>
+            <span class="badge">Sahip: {{ doc['owner_username'] }}</span>
+            <span class="badge">{{ doc['category'] }}</span>
+            {% if doc['status'] == 'Onaylandı' %}<span class="badge ok">{{ doc['status'] }}</span>
+            {% elif doc['status'] == 'İncelemede' %}<span class="badge warn">{{ doc['status'] }}</span>
+            {% else %}<span class="badge info">{{ doc['status'] }}</span>{% endif %}
+            <span class="badge">Son Güncelleme: {{ doc['updated_at'] }}</span>
+        </div>
+        <h2>{{ doc['title'] }}</h2>
+        {% if doc['image_filename'] %}
+        <div class="evidence-frame">
+            <img src="{{ url_for('static', filename=doc['image_filename']) }}" alt="{{ doc['title'] }}" onclick="openEvidence(this.src)">
+            <div class="evidence-caption"><span>Güvenlik kamera kaydı · CAM 07</span><span>Görüntüyü büyütmek için tıklayın</span></div>
+        </div>
+        {% endif %}
+        <div class="doc-content">{{ doc['content'] }}</div>
+        <a class="back-link" href="{{ url_for('documents') }}">← Arşive dön</a>
+    {% endif %}
+</div>
+{% if doc and doc['image_filename'] %}
+<div id="evidenceModal" class="modal" onclick="closeEvidence()">
+    <span class="modal-close" aria-label="Kapat">×</span>
+    <img id="evidenceModalImage" src="" alt="Büyütülmüş kamera kaydı" onclick="event.stopPropagation()">
+</div>
+<script>
+function openEvidence(src) {
+    document.getElementById('evidenceModalImage').src = src;
+    document.getElementById('evidenceModal').classList.add('open');
+}
+function closeEvidence() { document.getElementById('evidenceModal').classList.remove('open'); }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeEvidence(); });
+</script>
+{% endif %}
+{% endblock %}

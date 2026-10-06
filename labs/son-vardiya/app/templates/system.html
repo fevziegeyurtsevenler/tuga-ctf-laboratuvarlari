@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Sistem Durumu - NovaSis{% endblock %}
+{% block breadcrumb %}
+<div class="breadcrumb"><a href="{{ url_for('portal') }}">Ana Sayfa</a><span class="sep">/</span><span class="current">Sistem Durumu</span></div>
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="page-head">
+        <div class="eyebrow">BT Operasyonları</div>
+        <h1>Sistem Durumu</h1>
+        <p class="subtitle">Altyapı bileşenlerinin son kontrol bilgileri.</p>
+    </div>
+    <table>
+        <thead><tr><th>Bileşen</th><th>Durum</th><th>Son Kontrol</th></tr></thead>
+        <tbody>
+        <tr><td>Personel Portalı</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">Az önce</td></tr>
+        <tr><td>Doküman Arşivi</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">Az önce</td></tr>
+        <tr><td>E-posta Sunucusu</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">3 dk önce</td></tr>
+        <tr><td>VPN</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">6 dk önce</td></tr>
+        <tr><td>DNS</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">8 dk önce</td></tr>
+        <tr><td>DHCP</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">8 dk önce</td></tr>
+        <tr><td>Bina Ağ Altyapısı</td><td><span class="dot dot-warn"></span> Kısmi Kesinti Geçmişi</td><td class="dim">31 Ağustos 02:00-04:00</td></tr>
+        <tr><td>Güvenlik Kamera Sistemi</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">5 dk önce</td></tr>
+        <tr><td>Yedekleme Servisi</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">Bu sabah 03:00</td></tr>
+        <tr><td>Dahili Arşiv Servisi</td><td><span class="dot dot-ok"></span> Aktif</td><td class="dim">Kayıt koduyla erişim</td></tr>
+        </tbody>
+    </table>
+    <div class="section-label">Notlar</div>
+    <p class="subtitle">Bina ağ altyapısında planlı bakım sırasında kısa süreli bağlantı kesintileri kaydedilmiştir. Detaylı loglar Sistem Yönetimi ekibi tarafından incelenmektedir.</p>
+    <p class="subtitle">Dahili Arşiv Servisi, genel doküman listelemesinin dışında tutulan ayrı bir modüldür; yalnızca ilgili kayıt kodu bilinerek <code>/archive/&lt;kayıt-kodu&gt;</code> yolu üzerinden erişilebilir. Bu servis, çoğunlukla güvenlik ve olay yönetimi birimlerinin kullandığı ek kayıtları barındırır ve genel personel dizininde listelenmez.</p>
+</div>
+{% endblock %}
