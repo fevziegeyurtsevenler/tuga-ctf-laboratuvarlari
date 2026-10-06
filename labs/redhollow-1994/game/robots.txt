@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /files/sicil.html
+Disallow: /files/spektrum.html
+Disallow: /files/
+Disallow: /downloads/
+Disallow: /kit/
+
+# Night Hatch — personel sicili ve saha spektrumu indeks dışı.
+# Tarama yasağı = gizlenen yol.

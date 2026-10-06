@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Night Hatch — Redhollow 1994</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/game.css?v=12">
+</head>
+<body>
+  <div id="grain"></div>
+  <div class="bant u"></div>
+  <div class="bant a"></div>
+  <div id="kapakU"></div>
+  <div id="kapakA"></div>
+  <div id="perde"></div>
+  <div id="fener"></div>
+  <div id="imlec"></div>
+  <div class="bolum-eti">NIGHT HATCH</div>
+  <div class="sezon-eti">REDHOLLOW BASIN · 1994</div>
+  <div id="slotlar"></div>
+
+  <div class="sahne aktif" id="s-karanlik"></div>
+  <div class="sahne" id="s-baslik">
+    <div class="gbaslik" data-t="NIGHT HATCH">NIGHT HATCH</div>
+    <div class="ufuk"></div>
+    <div class="altbas">bölüm I — gişe</div>
+  </div>
+  <div class="sahne" id="s-oda">
+    <div class="oda">
+      <div class="katman" id="k-derin">
+        <div id="odaFoto"><img id="odaImg" src="assets/ch1-gise.jpg" alt=""></div>
+      </div>
+      <div class="katman" id="k-yakin"></div>
+    </div>
+  </div>
+  <div class="sahne" id="s-son">
+    <div class="buyuk">Bölüm kapandı</div>
+    <div class="ufuk"></div>
+    <div class="son-not" id="sonNot">üç işaret mühürlendi</div>
+    <a class="sonraki" href="?b=2">bölüm II</a>
+  </div>
+  <div class="sahne" id="s-epilog">
+    <div class="epilog-ust">SON SAHA KAYDI</div>
+    <div class="epilog-ad">Lara Lock · 1994</div>
+    <div class="epilog-durum" id="epilogDurum">Lara Lock — son saha kaydı</div>
+    <button type="button" class="epilog-baslat" id="epilogBaslat">kaydı dinle</button>
+  </div>
+  <div class="sahne" id="s-final">
+    <div class="final-baslik">Night Hatch kapandı</div>
+    <div class="final-yazi" id="finalYazi"></div>
+    <div class="final-imza" id="finalImza"></div>
+    <button type="button" class="epilog-baslat" id="finalLaraBtn">Lara'nın kaydını dinle</button>
+  </div>
+
+  <div id="kutu">
+    <div class="konusan" id="konusan"></div>
+    <div class="metin" id="metin"></div>
+    <div class="devam" id="devam">devam</div>
+  </div>
+  <div id="vinyet">
+    <img id="vinyetImg" alt="">
+    <a href="#" download>indir</a>
+  </div>
+
+  <button type="button" id="sesBtn">ses</button>
+  <button type="button" id="isaretBtn">işaret gir</button>
+
+  <div id="panel">
+    <div class="win">
+      <div class="tbar">Night Hatch · işaret kasa<span id="kapatPanel">×</span></div>
+      <form class="gov2" id="flagForm">
+        <div class="girisSatir">
+          <label for="flagIn">TUGA</label>
+          <input id="flagIn" autocomplete="off" spellcheck="false" placeholder="TUGA{...}">
+        </div>
+        <div class="hata2" id="girisHata"></div>
+        <button class="eskibtn" type="submit">onayla</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/flags.js?v=4"></script>
+  <script src="js/engine.js?v=32"></script>
+</body>
+</html>
