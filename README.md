@@ -6,8 +6,8 @@
 
 **Senaryolu, Docker ile lokalde tek komutta ayağa kalkan Türkçe siber güvenlik lab'ları — her biri en az 2 farklı zafiyet ve 2 flag içerir.**
 
-[![Lab Sayısı](https://img.shields.io/badge/lab-1-1C2957?style=flat-square)](#-katalog)
-[![Toplam Flag](https://img.shields.io/badge/flag-2-2E4FD0?style=flat-square)](#-katalog)
+[![Lab Sayısı](https://img.shields.io/badge/lab-3-1C2957?style=flat-square)](#-katalog)
+[![Toplam Flag](https://img.shields.io/badge/flag-16-2E4FD0?style=flat-square)](#-katalog)
 [![Lab Doğrulama](https://img.shields.io/github/actions/workflow/status/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/lab-dogrula.yml?style=flat-square&label=do%C4%9Frulama&color=2E4FD0)](https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/actions/workflows/lab-dogrula.yml)
 [![PR'lar Açık](https://img.shields.io/badge/PR'lar-a%C3%A7%C4%B1k-2E4FD0?style=flat-square)](CONTRIBUTING.md)
 [![Katkıcılar](https://img.shields.io/github/contributors/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari?style=flat-square&label=lab%20geli%C5%9Ftiren&color=1C2957)](https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/graphs/contributors)
@@ -53,6 +53,8 @@ docker compose down -v   # kapatmak için
 | Lab | Alan | Zorluk | Zafiyet | Flag | Yazar |
 |-----|------|--------|---------|------|-------|
 | [TÜGA İç Portalı](labs/sablon-lab/) | 🕸️ Web | Kolay | 2 | 2 | [@fevziegeyurtsevenler](https://github.com/fevziegeyurtsevenler) |
+| [Night Hatch — Redhollow 1994](labs/redhollow-1994/) | 🔬 Adli Bilişim | Orta | 4 | 12 | [@rplny](https://github.com/rplny) |
+| [Son Vardiya](labs/son-vardiya/) | 🕸️ Web | Orta | 2 | 2 | [@YusufB-8](https://github.com/YusufB-8) |
 <!-- LAB-KATALOG:BITIS -->
 
 ## Repo düzeni

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TÜGA CTF Laboratuvarları</title>
-<meta name="description" content="Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları. 1 lab, 1 alan, 2 flag. TÜGA Siber Güvenlik Komitesi.">
+<meta name="description" content="Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları. 3 lab, 2 alan, 16 flag. TÜGA Siber Güvenlik Komitesi.">
 <link rel="canonical" href="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="TÜGA CTF Laboratuvarları">
-<meta property="og:description" content="1 senaryolu, Docker ile lokalde çalışan Türkçe CTF lab'ı — 2 flag. TÜGA Siber Güvenlik Komitesi'nin ortak eseri.">
+<meta property="og:description" content="3 senaryolu, Docker ile lokalde çalışan Türkçe CTF lab'ı — 16 flag. TÜGA Siber Güvenlik Komitesi'nin ortak eseri.">
 <meta property="og:url" content="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/">
 <meta property="og:image" content="https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari/assets/tuga-logo.jpeg">
 <meta property="og:locale" content="tr_TR">
@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "TÜGA CTF Laboratuvarları", "description": "Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları dizini.", "url": "https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari", "inLanguage": "tr", "dateModified": "2026-09-12", "publisher": {"@type": "Organization", "name": "TÜGA Siber Güvenlik Komitesi"}, "mainEntity": {"@type": "ItemList", "numberOfItems": 1, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TÜGA İç Portalı", "url": "https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/tree/main/labs/sablon-lab", "description": "TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de \"selamlama\" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini sömürünce bir flag açığa çıkıyor. Amacın: yetkin olmayan yerlere ulaşmak."}]}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "TÜGA CTF Laboratuvarları", "description": "Senaryolu, Docker ile lokalde çalışan Türkçe siber güvenlik CTF laboratuvarları dizini.", "url": "https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari", "inLanguage": "tr", "dateModified": "2026-10-06", "publisher": {"@type": "Organization", "name": "TÜGA Siber Güvenlik Komitesi"}, "mainEntity": {"@type": "ItemList", "numberOfItems": 3, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TÜGA İç Portalı", "url": "https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/tree/main/labs/sablon-lab", "description": "TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de \"selamlama\" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini sömürünce bir flag açığa çıkıyor. Amacın: yetkin olmayan yerlere ulaşmak."}, {"@type": "ListItem", "position": 2, "name": "Night Hatch — Redhollow 1994", "url": "https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/tree/main/labs/redhollow-1994", "description": "1994’te hiç açılmayan bir dinozor parkı. Dr. Lara Lock arşivi mühürlemeden önce on iki iz bırakmış. Sen arşivcisin: istemci sızıntıları, stego, OSINT ve tersine mühendislik karışık; aynı tür arka arkaya gelmez."}, {"@type": "ListItem", "position": 3, "name": "Son Vardiya", "url": "https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari/tree/main/labs/son-vardiya", "description": "NovaSis Teknoloji A.Ş. ofisine gelen çalışanlar Genel Müdür Ahmet Yılmaz'ı bulamaz; masasındaki telefonda 112'yi aramaya çalışırken kesilmiş bir çağrı kaydı vardır. Oyuncu, şirketin dahili Personel Portalı üzerinden olayı araştırır ve son vardiyada neler yaşandığını ortaya çıkarır."}]}}</script>
 <style>
 :root{
   --lacivert:#1C2957; --lacivert-koyu:#121C3D; --murekkep:#1B2340;
@@ -174,9 +174,9 @@ footer{border-top:1px solid var(--cizgi); background:var(--kagit); padding:30px 
     <h1>TÜGA CTF<br><span class="vurgu">Laboratuvarları</span></h1>
     <p class="alt">Senaryolu, Docker ile tek komutta lokalde ayağa kalkan Türkçe siber güvenlik lab'ları. Her lab en az 2 farklı zafiyet ve 2 flag içerir. İndir, çöz, flag'ini burada doğrula.</p>
     <div class="sayilar">
-      <div class="sayi"><b>1</b><span>laboratuvar</span></div>
-      <div class="sayi"><b>1</b><span>alan</span></div>
-      <div class="sayi"><b>2</b><span>flag</span></div>
+      <div class="sayi"><b>3</b><span>laboratuvar</span></div>
+      <div class="sayi"><b>2</b><span>alan</span></div>
+      <div class="sayi"><b>16</b><span>flag</span></div>
     </div>
     <div class="cta">
       <a class="dugme dolu" href="#lablar">Laboratuvarlara Göz At</a>
@@ -193,12 +193,12 @@ footer{border-top:1px solid var(--cizgi); background:var(--kagit); padding:30px 
   <div class="filtre-satir" id="alan-filtre">
     <span class="etiket-baslik">Alan</span>
     <button class="cip secili" data-tur="alan" data-deger="tum">Tümü</button>
-    <button class="cip" data-tur="alan" data-deger="Web">🕸️ Web <b>1</b></button>
+    <button class="cip" data-tur="alan" data-deger="Web">🕸️ Web <b>2</b></button><button class="cip" data-tur="alan" data-deger="Adli Bilişim">🔬 Adli Bilişim <b>1</b></button>
   </div>
   <div class="filtre-satir" id="zorluk-filtre">
     <span class="etiket-baslik">Zorluk</span>
     <button class="cip secili" data-tur="zorluk" data-deger="tum">Tümü</button>
-    <button class="cip" data-tur="zorluk" data-deger="Kolay">Kolay <b>1</b></button>
+    <button class="cip" data-tur="zorluk" data-deger="Kolay">Kolay <b>1</b></button><button class="cip" data-tur="zorluk" data-deger="Orta">Orta <b>2</b></button>
   </div>
 </div>
 
@@ -222,6 +222,42 @@ footer{border-top:1px solid var(--cizgi); background:var(--kagit); padding:30px 
   </div>
   <div class="bayrak-panel" data-slug="sablon-lab" hidden></div>
 </article>
+<article class="kart" data-alan="Adli Bilişim" data-zorluk="Orta" data-slug="redhollow-1994" data-ara="night hatch — redhollow 1994 1994’te hiç açılmayan bir dinozor parkı. dr. lara lock arşivi mühürlemeden önce on iki iz bırakmış. sen arşivcisin: istemci sızıntıları, stego, osint ve tersine mühendislik karışık; aynı tür arka arkaya gelmez.
+ adli bilişim orta stego osint forensics reverse web docker i̇stemci tarafı bilgi sızıntısı (dom, css, çerez) steganografi ve metadata (ses spektrumu, exif) osint / dizin keşfi (açık kaynak, robots) tersine mühendislik (elf numune etiketleyici)">
+  <div class="kart-ust">
+    <span class="rozet-alan">🔬 Adli Bilişim</span>
+    <span class="rozet-zor zor-orta">Orta</span>
+    
+  </div>
+  <h3>Night Hatch — Redhollow 1994</h3>
+  <p class="senaryo">1994’te hiç açılmayan bir dinozor parkı. Dr. Lara Lock arşivi mühürlemeden önce on iki iz bırakmış. Sen arşivcisin: istemci sızıntıları, stego, OSINT ve tersine mühendislik karışık; aynı tür arka arkaya gelmez.</p>
+  <details class="zaf"><summary>4 zafiyet · 12 flag</summary><ul><li>İstemci tarafı bilgi sızıntısı (DOM, CSS, çerez)</li><li>Steganografi ve metadata (ses spektrumu, EXIF)</li><li>OSINT / dizin keşfi (açık kaynak, robots)</li><li>Tersine mühendislik (ELF numune etiketleyici)</li></ul></details>
+  <div class="etiketler"><span class="etiket">stego</span><span class="etiket">osint</span><span class="etiket">forensics</span><span class="etiket">reverse</span><span class="etiket">web</span><span class="etiket">docker</span></div>
+  <div class="yazar">👤 <a href="https://github.com/rplny" target="_blank" rel="noopener">rplny</a></div>
+  <div class="kart-alt">
+    <button class="btn kur-btn" data-kur="git clone --depth 1 --filter=blob:none --sparse https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari.git &amp;&amp; cd tuga-ctf-laboratuvarlari &amp;&amp; git sparse-checkout set labs/redhollow-1994 &amp;&amp; cd labs/redhollow-1994 &amp;&amp; docker compose up -d --build" data-port="8080">▶ Kurulum komutu</button>
+    <button class="btn bayrak-btn" data-slug="redhollow-1994">🚩 Flag gir</button>
+  </div>
+  <div class="bayrak-panel" data-slug="redhollow-1994" hidden></div>
+</article>
+<article class="kart" data-alan="Web" data-zorluk="Orta" data-slug="son-vardiya" data-ara="son vardiya novasis teknoloji a.ş. ofisine gelen çalışanlar genel müdür ahmet yılmaz&#x27;ı bulamaz; masasındaki telefonda 112&#x27;yi aramaya çalışırken kesilmiş bir çağrı kaydı vardır. oyuncu, şirketin dahili personel portalı üzerinden olayı araştırır ve son vardiyada neler yaşandığını ortaya çıkarır.
+ web orta web sqli idor sql injection (union-based) — /search personel arama endpoint&#x27;i idor / broken object level authorization — /documents/view doküman görüntüleme endpoint&#x27;i">
+  <div class="kart-ust">
+    <span class="rozet-alan">🕸️ Web</span>
+    <span class="rozet-zor zor-orta">Orta</span>
+    
+  </div>
+  <h3>Son Vardiya</h3>
+  <p class="senaryo">NovaSis Teknoloji A.Ş. ofisine gelen çalışanlar Genel Müdür Ahmet Yılmaz&#x27;ı bulamaz; masasındaki telefonda 112&#x27;yi aramaya çalışırken kesilmiş bir çağrı kaydı vardır. Oyuncu, şirketin dahili Personel Portalı üzerinden olayı araştırır ve son vardiyada neler yaşandığını ortaya çıkarır.</p>
+  <details class="zaf"><summary>2 zafiyet · 2 flag</summary><ul><li>SQL Injection (Union-based) — /search personel arama endpoint&#x27;i</li><li>IDOR / Broken Object Level Authorization — /documents/view doküman görüntüleme endpoint&#x27;i</li></ul></details>
+  <div class="etiketler"><span class="etiket">web</span><span class="etiket">sqli</span><span class="etiket">idor</span></div>
+  <div class="yazar">👤 <a href="https://github.com/YusufB-8" target="_blank" rel="noopener">YusufB-8</a></div>
+  <div class="kart-alt">
+    <button class="btn kur-btn" data-kur="git clone --depth 1 --filter=blob:none --sparse https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari.git &amp;&amp; cd tuga-ctf-laboratuvarlari &amp;&amp; git sparse-checkout set labs/son-vardiya &amp;&amp; cd labs/son-vardiya &amp;&amp; docker compose up -d --build" data-port="5001">▶ Kurulum komutu</button>
+    <button class="btn bayrak-btn" data-slug="son-vardiya">🚩 Flag gir</button>
+  </div>
+  <div class="bayrak-panel" data-slug="son-vardiya" hidden></div>
+</article>
   </div>
   <p class="bos-mesaj" id="bos">Aramanla eşleşen laboratuvar bulunamadı.</p>
 
@@ -240,12 +276,12 @@ footer{border-top:1px solid var(--cizgi); background:var(--kagit); padding:30px 
 
 <footer>
   <div class="alt-ic">
-    <span>© TÜGA Siber Güvenlik Komitesi · içerik <a href="https://creativecommons.org/licenses/by/4.0/deed.tr">CC BY 4.0</a> · güncelleme 12.09.2026</span>
+    <span>© TÜGA Siber Güvenlik Komitesi · içerik <a href="https://creativecommons.org/licenses/by/4.0/deed.tr">CC BY 4.0</a> · güncelleme 06.10.2026</span>
     <span>Komite Başkanı: <a href="https://www.linkedin.com/in/fevziege/">Fevzi Ege Yurtsevenler</a></span>
   </div>
 </footer>
 
-<script>window.FLAG_VERI = {"sablon-lab": [{"ipucu": "Notlar sıralı id ile geliyor. Ya kendine ait olmayan bir id istersen?", "h": "609f611b3ca5137f9331a44b680f12c207a8c7b15bc00b2c0771572f1580cb77"}, {"ipucu": "Selamlama girdini şablon motoruna sokabilir misin? {{7*7}} dene.", "h": "8acb1d84036e23f113dd83789057bc4b8078373ea2c69e9f64419b00b8096e08"}]};</script>
+<script>window.FLAG_VERI = {"sablon-lab": [{"ipucu": "Notlar sıralı id ile geliyor. Ya kendine ait olmayan bir id istersen?", "h": "609f611b3ca5137f9331a44b680f12c207a8c7b15bc00b2c0771572f1580cb77"}, {"ipucu": "Selamlama girdini şablon motoruna sokabilir misin? {{7*7}} dene.", "h": "8acb1d84036e23f113dd83789057bc4b8078373ea2c69e9f64419b00b8096e08"}], "redhollow-1994": [{"ipucu": "Sayfanın kendi belgesi bazen tabeladan dürüsttür.", "h": "1d0618ecb1e2b0c499be9033464b5ad1de38dcb16cce1dd4bbab90d5f9f15a20"}, {"ipucu": "Gişede ıslak bir kâğıt, sayıları harf sanır.", "h": "3a13949ecec6a4ef935b0acdae597bd0f1a1269b36b2fb286eb40b46f10d6a8f"}, {"ipucu": "Üst bant boya değil; stil dosyasında durur.", "h": "155c8d1cd6780ce7f5faa7b5846a5140d522e8dd25d28cbdc87f5d40d5112159"}, {"ipucu": "Yanlış raftaki kemik çizimin içine sıkışmış.", "h": "21ed4458771e260c6cf31d85a7777962f31ac561b0e969a9f5379ded1a2ecd31"}, {"ipucu": "Son kare konuşur; başlık gürültüdür.", "h": "e7d469d0f53791e7ac973a3871a3c0acd2593b64758317369c0c482b0da3a3fd"}, {"ipucu": "Işık düşünce tarayıcıda bir iz kalır.", "h": "057c85a6d46c9caffd9cfaff8eef5aad85872551c9ec5a1dbdfe2d65fad8600c"}, {"ipucu": "Tezgâh altındaki last-call başka dilde.", "h": "d1012c641cba30f6058db15fe466ac495db067c2f64508764832484d6b9ceeee"}, {"ipucu": "Kükreme kulakla bitmez; frekansa bak.", "h": "073ecd1e1baf415b6797f37b6ced5cc4644b0f5ad450e0ef82768d3c0a8cc906"}, {"ipucu": "Lara açık kayıt bırakmıştı. Fotoğrafın notuna bak; yasak dizin de konuşur.", "h": "294ea550ea4bc5f45d65d379bd21f02bc1fdde8cfd20d7126b8301e9c7f9d722"}, {"ipucu": "Numune etiketleyici kafeste uyanır.", "h": "edf3a8186b00c07866768c4184612e788d10f07859b54656325dabb660404c73"}, {"ipucu": "Botların görmemesi gereken yol, yasağın kendisidir.", "h": "87b8fa18123ef08acc6d5e4c80023d9968b93ed8320800f33e6cf6fa695a724c"}, {"ipucu": "İkinci katman aynı programda, daha derin bir kodla.", "h": "fd4ac05ea7dba3d2ccf2b8485f9b2fe9a2a684faf5806b74401a38f4988ae3d5"}], "son-vardiya": [{"ipucu": "Personel arama sonucunda normalde gösterilmeyen bir sütunu UNION-based SQLi ile açığa çıkar.", "h": "1a595ff5111c2455a03d435cc574369843167753fe731c7beb3f2a0c2466df5f"}, {"ipucu": "IDOR ile ulaşılan kamera görüntüsünü dikkatle incele; görüntüdeki bir referans kısıtlı arşiv kaydına götürür.", "h": "c3412a538ae0a8bfe99df458c8c03b7b770a5e49848ba7210e1974bd0874acaa"}]};</script>
 <script>
 /* ---- ağ animasyonu ---- */
 (function(){
