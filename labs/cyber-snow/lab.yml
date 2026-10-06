@@ -10,7 +10,7 @@ zafiyetler:
   - "Information Disclosure - Bilgi İfşası"
 flaglar:
   - ipucu: "Giris sayfasinin HTML yapisini ve kaynak kodlarini inceleyin."
-    sha256: "378fcc0d161dc852285df6cc6e9c3de048e6ad1f4f89ad1e1d627b1d9aafb9e9"
+    sha256: "88ba76f3ce033b0467064584891fbbe384dd6ca5df4bd10b502590976b97af32"
   - ipucu: "Kullanici adi kontrolundeki zafiyeti somurerek yonetici olarak oturum acin."
     sha256: "9dd109d678c2e76460ea396d997eb4c6814bcd2e29310fcb132d0ab58031191e"
 port: 8080
