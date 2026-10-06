@@ -1,0 +1,19 @@
+slug: devpuan-ctf
+baslik: "DevPuan CTF - Stajyerin CEO Olma Mücadelesi"
+alan: Web
+zorluk: Kolay
+yazar: bilalklyc
+senaryo: >
+Şirket içi DevPuan alışveriş portalına 50 DP'si olan Stajyer Ahmet olarak sızıp, 
+iş mantığı hatasıyla (Business Logic) CEO rozetini almalı ve ardından İK portalındaki 
+SQL Injection zafiyetini sömürerek veritabanındaki maaş/yetki bilgilerini değiştirmelisin.
+zafiyetler:
+- "Business Logic Flaw — Negatif miktar (Negative Quantity) ile bakiye manipülasyonu"
+- "SQL Injection (UPDATE) — Parametrik olmayan girdi ile yetki yükseltme"
+flaglar:
+- ipucu: "Eksi eksi daha ne yapar? Sepete eklenecek ürün sayısına negatif bir değer girmeyi dene."
+sha256: "1d719a618e9eb02ce4428f6bbbc224662336acf69df0474fab8f17e7874ee85d"
+- ipucu: "İK Banu seninle dalga geçiyor ama veritabanı yalan söylemez. Kesme işareti (') atıp veritabanının tepkisini ölç ve UPDATE sorgusunu kır."
+sha256: "80072a11865465fa26e443287ae3f7477f999cad907b0fdff17cbca125cc3244"
+port: 5000
+etiketler: [business-logic, sqli, privilege-escalation]
