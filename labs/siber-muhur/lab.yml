@@ -1,0 +1,28 @@
+# ── TÜGA CTF Laboratuvarı — Siber Mühür ──────────────────────────────
+slug: siber-muhur
+baslik: "Siber Mühür // SOC & DFIR Lab"
+alan: Adli Bilişim
+zorluk: Orta
+yazar: @pelintalu
+senaryo: >
+  Societas Tenebris arşiv sunucusuna sızan APT-Erebos aktörünün
+  bıraktığı izleri aydınlat. Katılımcı; web loglarından LFI zafiyetini,
+  komut geçmişinden gizlenmiş yükleri, ağ trafiğinden DNS tünellemesini
+  ve sahte Systemd servisinden kalıcılık mekanizmasını çözecektir. Amacın:
+  Saldırı zincirini kırmak ve dört gizli mührü bulmak.
+zafiyetler:
+  - "LFI — Yerel dosya dahil etme ve Web Shell üzerinden ilk sızma"
+  - "Anti-Forensics — Komut gizleme ve Base64 tersine çevirme"
+  - "DNS Exfiltration — Hex formatında alt alan adı tünellemesi"
+  - "Persistence — Systemd ile kalıcılık ve C2 tuzağı (Rabbit Hole)"
+flaglar:
+  - ipucu: "Erişim günlüklerinde (access.log) anormal dosya indirme isteklerine ve URL içindeki kodlanmış (encoded) verilere odaklan."
+    sha256: "0de70ec6852bbab2fa8398e4d2a1b945fb225c57b4202c34a2e8c2ec6f4370ba"
+  - ipucu: "Bash geçmişindeki son silme (shred) işlemine güvenme; tersine çevrilip (reverse) çalıştırılan stringi incele."
+    sha256: "c18f506e788bc134e7935cf1f308a3d699566993a4cd111f196ce2d547f872b2"
+  - ipucu: "DNS günlüklerinde belirli bir domaine giden TXT sorgularındaki alt alan adlarını (subdomain) birleştirip Hex formatından dönüştür."
+    sha256: "25048d0859a1f26b5275e5233bc294c79cffdb318b70417852f6f59d57a2df25"
+  - ipucu: "Sahte servisin çalıştırdığı Python betiğindeki açık Base64 tuzağa düşme; parçalanmış değişkenleri birleştir."
+    sha256: "a3db35ea1a04ba38289ff70498877bcce3e9cdb79f83658516fb296537617b88"
+port: 8080
+etiketler: [dfir, lfi, dns-tunneling, persistence, soc]
