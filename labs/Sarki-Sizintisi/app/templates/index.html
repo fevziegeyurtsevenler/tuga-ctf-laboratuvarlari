@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotifly — Yeraltı Müzik Sızıntıları</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: radial-gradient(circle at top, #18181b 0%, #09090b 100%);
+            color: #f4f4f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            background-color: #121214;
+            border: 1px solid #27272a;
+            border-radius: 18px;
+            padding: 32px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+        .cover {
+            width: 100%;
+            height: 240px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+        }
+        .badge {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        h1 { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: #ffffff; }
+        .artist { color: #a1a1aa; font-size: 14px; margin-bottom: 24px; }
+        audio { width: 100%; margin-bottom: 24px; border-radius: 8px; }
+        .download-btn {
+            display: inline-block;
+            width: 100%;
+            background-color: #10b981;
+            color: #042f2e;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+        }
+        .download-btn:hover { background-color: #34d399; }
+        .warning { font-size: 11px; color: #71717a; margin-top: 16px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="badge">Korsan Sızıntı &bull; Ham Kayıt</span>
+        <div class="cover">🎵</div>
+        <h1>Kusursuz Plan (Sızdırılan Ham Demo)</h1>
+        <div class="artist">JANTİ &bull; Çıkışa 3 Gün Kala Ele Geçirildi</div>
+
+        <audio controls>
+            <source src="{{ url_for('static', filename='audio/sizinti_parca.wav') }}" type="audio/wav">
+            Tarayıcınız ses oynatıcıyı desteklemiyor.
+        </audio>
+
+        <a href="{{ url_for('static', filename='audio/sizinti_parca.wav') }}" class="download-btn" download>
+            Ham Ses Kaydını İndir (WAV)
+        </a>
+        <div class="warning">DİKKAT: Bu kayıt yayımlanmamış ham stüdyo miksajıdır. Yalnızca analiz amaçlıdır.</div>
+    </div>
+</body>
+</html>

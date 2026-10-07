@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  janti-challenge:
+    build: .
+    container_name: ctf_sarki_sizintisi
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
