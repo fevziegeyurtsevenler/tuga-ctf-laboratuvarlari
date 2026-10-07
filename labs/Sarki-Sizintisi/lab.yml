@@ -1,0 +1,22 @@
+# ── TÜGA CTF Laboratuvarı — meta dosyası ──────────────────────────────
+# Bu dosya katalog sitesinin tek doğruluk kaynağıdır. Her PR'da doldurulur.
+# Zorunlu alanlar: slug, baslik, alan, zorluk, yazar, senaryo, zafiyetler(≥2), flaglar(≥2), port
+slug: Sarki-Sizintisi              # klasör adıyla AYNI olmalı
+baslik: "Sarki Sizintisi"
+alan: "OSINT"             # Web | Ağ | OSINT | Binary/Pwn | Tersine Mühendislik | Kripto | Adli Bilişim | AI Güvenliği | Diğer
+zorluk: Kolay                     # Kolay | Orta | Zor
+yazar: SidikaEtci                # GitHub kullanıcı adın
+senaryo: >
+  Yeni müzik grubu Janti'nin kariyer parçası, resmi çıkışına sadece 3 gün kala 
+  korsan müzik portalı Spotifly'a sızdırıldı. Sızdırılan ses dalgalarındaki izleri takip edin, gizli 
+  kulis sayfasına sızın ve sabotajcıyı ifşa edin.
+zafiyetler:                      # en az 2 FARKLI zafiyet
+  - "Audio Spectrogram Steganography (Ses Dalgalarında Frekans Gizleme)"
+  - "Image EXIF / Metadata Forensics (Görsel Katmanında Adli Bilişim İzi)"
+flaglar:                         # en az 2 flag; SADECE sha256 hash yazılır, düz metin ASLA
+  - ipucu: "İnsan kulağının duyamadığı üst frekanslarda gizlenmiş bir rota ve imza olabilir mi?"
+    sha256: "f298aacb94029d65caea064bff0b2ea203cc7acdf0ddb680c0d2440e4d03df0e"
+  - ipucu: "Kulis sayfasındaki güvenlik kamerası fotoğrafının pikselleri dışındaki alanlara baktın mı?"
+    sha256: "d09f041fcb01b32f7fab5e20db4f7686b83f864528427a66397ef61b178e16ab"
+port: 5000                       # docker compose ile açılan ana port (http://localhost:PORT)
+etiketler: [steganography, forensics, audio, exif, flask]
