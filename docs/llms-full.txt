@@ -6,11 +6,41 @@
 - Zafiyetler: IDOR — yetkisiz nesne erişimi (başkasının notunu okuma); SSTI — Jinja2 sunucu taraflı şablon enjeksiyonu
 - Kurulum: labs/sablon-lab → docker compose up -d --build (port 8080)
 
+## AeroTech: Ağ Teşhis Portalı
+- Alan: Web | Zorluk: Kolay | Yazar: aysenuroglek
+- Senaryo: AeroTech Savunma'nın iç ağ teşhis konsolu yalnızca yöneticilere açık. Misafir olarak giriyorsun. Önce kendini yönetici yapman, sonra ping aracının arkasındaki sunucuda komut çalıştırman gerekiyor.
+- Zafiyetler: Broken Access Control — çerezdeki rolü değiştirerek yönetici yetkisi alma; OS Command Injection — ping alanından sunucuda komut çalıştırma
+- Kurulum: labs/aerotech-ag-teshis → docker compose up -d --build (port 5000)
+
+## DevPuan CTF - Stajyerin CEO Olma Mücadelesi
+- Alan: Web | Zorluk: Kolay | Yazar: bilalklyc
+- Senaryo: Şirket içi DevPuan alışveriş portalına 50 DP'si olan Stajyer Ahmet olarak sızıp, iş mantığı hatasıyla (Business Logic) CEO rozetini almalı ve ardından İK portalındaki SQL Injection zafiyetini sömürerek veritabanındaki maaş/yetki bilgilerini değiştirmelisin.
+- Zafiyetler: Business Logic Flaw — Negatif miktar (Negative Quantity) ile bakiye manipülasyonu; SQL Injection (UPDATE) — Parametrik olmayan girdi ile yetki yükseltme
+- Kurulum: labs/devpuan-ctf → docker compose up -d --build (port 5000)
+
+## Sarki Sizintisi
+- Alan: OSINT | Zorluk: Kolay | Yazar: SidikaEtci
+- Senaryo: Yeni müzik grubu Janti'nin kariyer parçası, resmi çıkışına sadece 3 gün kala  korsan müzik portalı Spotifly'a sızdırıldı. Sızdırılan ses dalgalarındaki izleri takip edin, gizli  kulis sayfasına sızın ve sabotajcıyı ifşa edin.
+- Zafiyetler: Audio Spectrogram Steganography (Ses Dalgalarında Frekans Gizleme); Image EXIF / Metadata Forensics (Görsel Katmanında Adli Bilişim İzi)
+- Kurulum: labs/Sarki-Sizintisi → docker compose up -d --build (port 5000)
+
+## TÜGA Kurumsal İç Portal
+- Alan: Web | Zorluk: Kolay | Yazar: kardelencoban
+- Senaryo: TUGA personeli icin hazirlanan dahili bir giris kapisi. Sistem mimari gelistirme asamasinda kaynak kodlarda bazi guvenlik ipuclari unutmus ve veritabani dogrulama katmaninda kritik bir parametre acigi birakmis.
+- Zafiyetler: SQL Injection - SQL Enjeksiyonu; Information Disclosure - Bilgi İfşası
+- Kurulum: labs/cyber-snow → docker compose up -d --build (port 8080)
+
 ## Night Hatch — Redhollow 1994
 - Alan: Adli Bilişim | Zorluk: Orta | Yazar: rplny
 - Senaryo: 1994’te hiç açılmayan bir dinozor parkı. Dr. Lara Lock arşivi mühürlemeden önce on iki iz bırakmış. Sen arşivcisin: istemci sızıntıları, stego, OSINT ve tersine mühendislik karışık; aynı tür arka arkaya gelmez.
 - Zafiyetler: İstemci tarafı bilgi sızıntısı (DOM, CSS, çerez); Steganografi ve metadata (ses spektrumu, EXIF); OSINT / dizin keşfi (açık kaynak, robots); Tersine mühendislik (ELF numune etiketleyici)
 - Kurulum: labs/redhollow-1994 → docker compose up -d --build (port 8080)
+
+## Siber Mühür // SOC & DFIR Lab
+- Alan: Adli Bilişim | Zorluk: Orta | Yazar: pelintalu
+- Senaryo: Societas Tenebris arşiv sunucusuna sızan APT-Erebos aktörünün bıraktığı izleri aydınlat. Katılımcı; web loglarından LFI zafiyetini, komut geçmişinden gizlenmiş yükleri, ağ trafiğinden DNS tünellemesini ve sahte Systemd servisinden kalıcılık mekanizmasını çözecektir. Amacın: Saldırı zincirini kırmak ve dört gizli mührü bulmak.
+- Zafiyetler: LFI — Yerel dosya dahil etme ve Web Shell üzerinden ilk sızma; Anti-Forensics — Komut gizleme ve Base64 tersine çevirme; DNS Exfiltration — Hex formatında alt alan adı tünellemesi; Persistence — Systemd ile kalıcılık ve C2 tuzağı (Rabbit Hole)
+- Kurulum: labs/siber-muhur → docker compose up -d --build (port 8080)
 
 ## Son Vardiya
 - Alan: Web | Zorluk: Orta | Yazar: YusufB-8

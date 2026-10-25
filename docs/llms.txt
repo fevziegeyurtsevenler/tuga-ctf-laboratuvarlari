@@ -4,9 +4,14 @@
 
 - Site: https://fevziegeyurtsevenler.github.io/tuga-ctf-laboratuvarlari
 - Repo: https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari
-- Lab sayısı: 3 | Alan: 2 | Toplam flag: 16
+- Lab sayısı: 8 | Alan: 3 | Toplam flag: 28
 
 ## Laboratuvarlar
 - TÜGA İç Portalı (Web, Kolay) — TÜGA'nın küçük bir iç personel portalı. Herkesin notları ve bir de "selamlama" özelliği var. Portalda kasıtlı olarak iki farklı web zafiyeti gizli; her birini s
+- AeroTech: Ağ Teşhis Portalı (Web, Kolay) — AeroTech Savunma'nın iç ağ teşhis konsolu yalnızca yöneticilere açık. Misafir olarak giriyorsun. Önce kendini yönetici yapman, sonra ping aracının arkasındaki s
+- DevPuan CTF - Stajyerin CEO Olma Mücadelesi (Web, Kolay) — Şirket içi DevPuan alışveriş portalına 50 DP'si olan Stajyer Ahmet olarak sızıp, iş mantığı hatasıyla (Business Logic) CEO rozetini almalı ve ardından İK portal
+- Sarki Sizintisi (OSINT, Kolay) — Yeni müzik grubu Janti'nin kariyer parçası, resmi çıkışına sadece 3 gün kala  korsan müzik portalı Spotifly'a sızdırıldı. Sızdırılan ses dalgalarındaki izleri t
+- TÜGA Kurumsal İç Portal (Web, Kolay) — TUGA personeli icin hazirlanan dahili bir giris kapisi. Sistem mimari gelistirme asamasinda kaynak kodlarda bazi guvenlik ipuclari unutmus ve veritabani dogrula
 - Night Hatch — Redhollow 1994 (Adli Bilişim, Orta) — 1994’te hiç açılmayan bir dinozor parkı. Dr. Lara Lock arşivi mühürlemeden önce on iki iz bırakmış. Sen arşivcisin: istemci sızıntıları, stego, OSINT ve tersine
+- Siber Mühür // SOC & DFIR Lab (Adli Bilişim, Orta) — Societas Tenebris arşiv sunucusuna sızan APT-Erebos aktörünün bıraktığı izleri aydınlat. Katılımcı; web loglarından LFI zafiyetini, komut geçmişinden gizlenmiş 
 - Son Vardiya (Web, Orta) — NovaSis Teknoloji A.Ş. ofisine gelen çalışanlar Genel Müdür Ahmet Yılmaz'ı bulamaz; masasındaki telefonda 112'yi aramaya çalışırken kesilmiş bir çağrı kaydı var
