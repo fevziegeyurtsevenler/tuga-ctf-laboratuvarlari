@@ -1,0 +1,19 @@
+slug: aerotech-ag-teshis
+baslik: "AeroTech: Ağ Teşhis Portalı"
+alan: Web
+zorluk: Kolay
+yazar: aysenuroglek
+senaryo: >
+  AeroTech Savunma'nın iç ağ teşhis konsolu yalnızca yöneticilere açık.
+  Misafir olarak giriyorsun. Önce kendini yönetici yapman, sonra ping
+  aracının arkasındaki sunucuda komut çalıştırman gerekiyor.
+zafiyetler:
+  - "Broken Access Control — çerezdeki rolü değiştirerek yönetici yetkisi alma"
+  - "OS Command Injection — ping alanından sunucuda komut çalıştırma"
+flaglar:
+  - ipucu: "Sunucu rolünü neye bakarak belirliyor? Tarayıcının sakladığı değerlere göz at."
+    sha256: "5d01259d9a9f9bbf7d0ccf133db59142d0116d012575be97da59ad1a806f88cf"
+  - ipucu: "Ping komutu kabukta çalışıyor. Bir komutun ardına ikinci bir komut ekleyebilir misin?"
+    sha256: "dbd822ca9fbe1f2383e3a0f1ae5dc3a0338585f5be1cd96ed3114c4fad3894f7"
+port: 5000
+etiketler: [cookie, access-control, command-injection, flask]

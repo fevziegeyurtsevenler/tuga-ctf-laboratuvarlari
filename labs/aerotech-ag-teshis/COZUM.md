@@ -1,3 +1,5 @@
+> ⚠️ **SPOILER:** Labı kendin çözmeyi denemeden okuma.
+
 # 📝 Lab Çözüm Dokümantasyonu (Write-up)
 
 ## 🚩 1. Aşama: Yetki Atlama (Cookie Tampering)
