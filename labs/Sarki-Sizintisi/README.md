@@ -15,12 +15,17 @@ Sisteme sızan mühendis, müzik dosyasının içine gizli bir kulis sayfasına 
 ### 🚀 Nasıl Çalıştırılır?
 Soru dizininde terminali açıp şu komutları çalıştırın:
 
+```bash
 # Soruyu ayağa kaldırmak için
-docker-compose up --build -d
+docker compose up -d --build
 
 # Soruyu durdurmak için
-docker-compose down
+docker compose down
+```
 
 ### 🚩 Bayraklar (Flags)
 * **Toplam Bayrak Sayısı:** 2 Adet
 * **Format:** TUGA{...}
+
+### ⚠️ Uyarı
+Lab yalnızca localhost'ta / izinli ortamda çalıştırılmalı, internete açılmamalı. Ayrıntı: [SECURITY.md](../../SECURITY.md).
