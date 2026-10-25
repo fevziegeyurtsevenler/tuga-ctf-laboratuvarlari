@@ -1,0 +1,17 @@
+slug: cyber-snow
+baslik: "TÜGA Kurumsal İç Portal"
+alan: Web
+zorluk: Kolay
+yazar: kardelencoban
+senaryo: >
+  TUGA personeli icin hazirlanan dahili bir giris kapisi. Sistem mimari gelistirme asamasinda kaynak kodlarda bazi guvenlik ipuclari unutmus ve veritabani dogrulama katmaninda kritik bir parametre acigi birakmis.
+zafiyetler:
+  - "SQL Injection - SQL Enjeksiyonu"
+  - "Information Disclosure - Bilgi İfşası"
+flaglar:
+  - ipucu: "Giris sayfasinin HTML yapisini ve kaynak kodlarini inceleyin."
+    sha256: "88ba76f3ce033b0467064584891fbbe384dd6ca5df4bd10b502590976b97af32"
+  - ipucu: "Kullanici adi kontrolundeki zafiyeti somurerek yonetici olarak oturum acin."
+    sha256: "9dd109d678c2e76460ea396d997eb4c6814bcd2e29310fcb132d0ab58031191e"
+port: 8080
+etiketler: [sqli, web, auth-bypass]

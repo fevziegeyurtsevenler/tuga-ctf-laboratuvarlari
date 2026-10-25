@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-SNOW Intranet | Giriş</title>
+    <!-- GIZLI SISTEM NOTU: 1. Asama Bayragi: TUGA{kaynak_kodda_unutulan_ipucu_1029} -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+        body { background: #f1f5f9; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        header {
+            background: #0f172a;
+            color: #fff;
+            padding: 14px 28px;
+            border-bottom: 2px solid #0284c7;
+        }
+        .brand { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 400px;
+            padding: 28px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        .card-header h2 { font-size: 17px; color: #0f172a; font-weight: 600; }
+        .card-header p { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #334155; }
+        input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 13px;
+            outline: none;
+            background: #f8fafc;
+        }
+        input:focus { border-color: #0284c7; background: #fff; }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+        button:hover { background: #0369a1; }
+
+        .hint-box {
+            margin-top: 20px;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .error {
+            background: #fef2f2;
+            border-left: 3px solid #ef4444;
+            color: #991b1b;
+            padding: 8px 12px;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">CYBER-SNOW INTRANET PORTALI</div>
+    </header>
+
+    <main>
+        <div class="login-card">
+            <div class="card-header">
+                <h2>Yetkili Girişi</h2>
+                <p>Kurum içi yönetim ağı kimlik doğrulama noktası</p>
+            </div>
+
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Kodu / Adı</label>
+                    <input type="text" id="username" name="username" placeholder="ör. admin" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Parola</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit">Sisteme Giriş Yap</button>
+            </form>
+
+            <div class="hint-box">
+                Erişim sorunu yaşıyorsanız kaynak kodlarındaki yönergeleri takip ediniz.
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
