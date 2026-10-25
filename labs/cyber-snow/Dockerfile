@@ -15,6 +15,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Projenin kalan tüm dosyalarını konteyner içine aktar
 COPY . .
 
+# Veritabanını ve admin kullanıcısını oluştur (gunicorn app.py'deki __main__ bloğunu çalıştırmaz)
+RUN python init_db.py
+
 # Flask ve Gunicorn için dinlenecek portu belirt
 EXPOSE 5000
 
