@@ -224,10 +224,24 @@
     </div>
 
     <script>
-        function checkFlag1() {
+        // Mühürler düz metin değil, sha256 hash olarak tutulur (kaynak koddan okunamasın diye)
+        const MUHUR_HASH = {
+            1: "1cc7320738c17260473d68991419874acd9ca67764f2056f7f95dee2fd41cc98",
+            2: "6b77493e4b36ea2885beb3e236c2483a66d41651c02f8284fade73b3f07720f1",
+            3: "7d3197f88327e4f2969f668cd7510e083a21cfd99256943c20193f29446782f9",
+            4: "e899af9f0dbd986063662d6c6aa71e38e9fb9ba0bd0276ae30b4313cf4fe4f19"
+        };
+
+        async function muhurDogruMu(no, val) {
+            const ozet = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(val));
+            const hex = Array.from(new Uint8Array(ozet)).map(b => b.toString(16).padStart(2, "0")).join("");
+            return hex === MUHUR_HASH[no];
+        }
+
+        async function checkFlag1() {
             let val = document.getElementById('flag1Input').value.trim();
             let msg = document.getElementById('msg1');
-            if(val.includes("b4nkcd00cl") || val === "TUGA{b4nkcd00cl_4uth_s34l}") {
+            if(await muhurDogruMu(1, val)) {
                 msg.style.color = "#c5a059";
                 msg.innerHTML = "[+] Mühür kabul edildi. Bölüm II açılıyor...";
                 document.getElementById('stage2').style.display = "block";
@@ -237,10 +251,10 @@
             }
         }
 
-        function checkFlag2() {
+        async function checkFlag2() {
             let val = document.getElementById('flag2Input').value.trim();
             let msg = document.getElementById('msg2');
-            if(val.includes("s0w2N1bHRfZDczbTBuX2JjMzN4") || val === "TUGA{s0w2N1bHRfZDczbTBuX2JjMzN4}") {
+            if(await muhurDogruMu(2, val)) {
                 msg.style.color = "#c5a059";
                 msg.innerHTML = "[+] İkinci mühür kırıldı. Bölüm III (Ağ Analizi) aktifleşiyor...";
                 document.getElementById('stage3').style.display = "block";
@@ -250,10 +264,10 @@
             }
         }
 
-        function checkFlag3() {
+        async function checkFlag3() {
             let val = document.getElementById('flag3Input').value.trim();
             let msg = document.getElementById('msg3');
-            if(val.includes("3xf1ltr4t10n_v14_dn5") || val === "TUGA{3xf1ltr4t10n_v14_dn5_tunnel}") {
+            if(await muhurDogruMu(3, val)) {
                 msg.style.color = "#c5a059";
                 msg.innerHTML = "[+] Ağ sızıntısı doğrulandı. Final aşaması açılıyor...";
                 document.getElementById('stage4').style.display = "block";
@@ -263,12 +277,12 @@
             }
         }
 
-        function checkFlag4() {
+        async function checkFlag4() {
             let val = document.getElementById('flag4Input').value.trim();
             let msg = document.getElementById('msg4');
             let stage4Div = document.getElementById('stage4');
             
-            if(val.includes("p3rs1st3nc3") || val === "TUGA{p3rs1st3nc3_thr0ugh_5yst3md}") {
+            if(await muhurDogruMu(4, val)) {
                 stage4Div.innerHTML = `
                     <style>
                         @keyframes pulseGlow {
