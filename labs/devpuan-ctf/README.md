@@ -81,17 +81,17 @@ Projeyi ayağa kaldırmanın en izole ve güvenli yolu **Docker** kullanmaktır.
 * [Docker](https://docs.docker.com/get-docker/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
-### 1. Repoyu Klonlayın
+### 1. Lab Klasörüne Geçin
 
 ```bash
-git clone https://github.com/bilalklyc/devpuan-ctf.git
-cd devpuan-ctf
+git clone https://github.com/fevziegeyurtsevenler/tuga-ctf-laboratuvarlari.git
+cd tuga-ctf-laboratuvarlari/labs/devpuan-ctf
 ```
 
 ### 2. Laboratuvarı Başlatın
 
 ```bash
-docker-compose up --build -d
+docker compose up -d --build
 ```
 
 ### 3. Uygulamaya Erişin
@@ -105,7 +105,7 @@ http://localhost:5000
 Laboratuvarı durdurmak için:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ---
