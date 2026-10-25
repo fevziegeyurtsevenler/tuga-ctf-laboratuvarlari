@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>☩ Siber Mühür // SOC & DFIR Lab</title>
+    <style>
+        body {
+            background-color: #0b0a09;
+            color: #d4ceb8;
+            font-family: 'Georgia', serif;
+            padding: 40px 20px;
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #c5a059;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #c5a059;
+            padding-bottom: 20px;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+        .sigil-box {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .incident-report {
+            background: #141312;
+            border: 1px dashed #8b0000;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #b5ac9d;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.1);
+        }
+        .incident-report h2 {
+            margin-top: 0;
+            color: #c5a059;
+            font-size: 16px;
+            border-bottom: 1px solid #3a3530;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .incident-report strong {
+            color: #c5a059;
+        }
+        .card, .hidden-stage {
+            background: #141312;
+            border: 1px solid #3a3530;
+            border-left: 3px solid #c5a059;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        h3 {
+            color: #c5a059;
+            margin-top: 0;
+        }
+        .badge {
+            font-family: 'Courier New', monospace;
+            background: #3a3530;
+            color: #c5a059;
+            padding: 3px 8px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        input[type="text"] {
+            background: #0b0a09;
+            color: #d4ceb8;
+            border: 1px solid #4a4238;
+            padding: 10px;
+            width: 320px;
+            font-family: 'Courier New', monospace;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #c5a059;
+        }
+        button {
+            background: #c5a059;
+            color: #0b0a09;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #d4c088;
+        }
+        a {
+            color: #c5a059;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #e6c875;
+        }
+        .hidden-stage {
+            display: none;
+        }
+        
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGO (SVG MÜHÜR) -->
+    <div class="sigil-box">
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="#c5a059" stroke-width="2" fill="none" />
+            <circle cx="50" cy="50" r="38" stroke="#8b0000" stroke-width="1" stroke-dasharray="4 4" fill="none" />
+            <polygon points="50,15 80,70 20,70" stroke="#c5a059" stroke-width="2" fill="none" />
+            <polygon points="50,85 20,30 80,30" stroke="#c5a059" stroke-width="2" fill="none" />
+            <circle cx="50" cy="50" r="6" fill="#8b0000" />
+        </svg>
+        <div style="font-size: 18px; color: #8b0000; letter-spacing: 6px; margin-top: 10px;">☩ 𝔈𝔛 𝔄𝔇𝔘𝔏𝔗𝔈ℜ𝔄 ☩</div>
+    </div>
+    
+    <h1>Siber Mühür</h1>
+    
+    <!-- VAKA BİLDİRİM KUTUSU VE AĞ HARİTASI -->
+    <div class="incident-report">
+        <h2>[ DİREKTİF: SOC OLAY MÜDAHALE BİLDİRİMİ ]</h2>
+        <p><strong>Vaka ID:</strong> INC-8492-X &nbsp;|&nbsp; <strong>Öncelik:</strong> P1 &nbsp;|&nbsp; <strong>Hedef:</strong> Societas Tenebris Arşivleri</p>
+        <p><strong>Tehdit Aktörü:</strong> APT-Erebos </p>
+        <p><strong>Olay Özeti:</strong> Sunucu kaynaklarında olağandışı bir CPU artışı saptanması üzerine acil inceleme başlatılmıştır. Saldırganın içeri nasıl sızdığı ve eylemlerine tam olarak ne zaman başladığı henüz bilinmiyor, çevre güvenlik cihazları ihlal sırasında şüpheli şekilde sessiz kalmıştır. İç ağdan dışarıya doğru belirsiz bir protokol üzerinden anormal veri akışı tespit edilince ağ bağlantısı manuel olarak kesilerek sunucu izole edilmiştir.</p>
+        <p><strong>İstihbarat Notu:</strong> Saldırganların (APT-Erebos) amacı, cemiyetin gizli üyelerinin kimliklerini ve okült arşivin nadir dijital kopyalarını çalarak şantaj yapmaktır. Taktiklerinde izlerini maskelemek için karmaşık kodlama yöntemleri kullandıkları değerlendirilmektedir. SOC operatörü olarak göreviniz: İlk sızma noktasını tespit etmek, dışarı kaçırılan verinin rotasını haritalamak ve sunucuya yerleştirilen zararlı kalıntıları mühürlemektir.</p>
+        
+        <!-- VAKA DELİL ARŞİVİ İNDİRME BUTONU (ZIP) -->
+        <div style="text-align: center; margin-top: 25px; margin-bottom: 10px;">
+            <a href="INC-8492-Artifacts.zip" download="INC-8492-Artifacts.zip" style="background: #141312; border: 1px solid #c5a059; color: #c5a059; padding: 12px 25px; font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; box-shadow: 0 0 10px rgba(197, 160, 89, 0.2); display: inline-block; text-decoration: none;">[ ☩ VAKA DELİL ARŞİVİNİ İNDİR (.ZIP) ]</a>
+        </div>
+
+        <!-- AĞ TOPOLOJİSİ ŞEMASI -->
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="background:#080706; border: 1px solid #3a3530; margin-top: 25px; width: 100%; border-radius: 4px;">
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#141312" stroke-width="1"/>
+            </pattern>
+            <rect width="800" height="200" fill="url(#grid)" />
+            <rect x="30" y="65" width="130" height="70" fill="#140a0a" stroke="#8b0000" stroke-width="2"/>
+            <text x="95" y="95" fill="#d4ceb8" font-family="Courier New" font-size="14" text-anchor="middle" font-weight="bold">APT-Erebos</text>
+            <text x="95" y="115" fill="#8b0000" font-family="Courier New" font-size="12" text-anchor="middle">Şüpheli Kaynak</text>
+            <rect x="250" y="55" width="30" height="90" fill="#141312" stroke="#c5a059" stroke-width="2" stroke-dasharray="4,4"/>
+            <text x="265" y="100" fill="#c5a059" font-family="Courier New" font-size="14" text-anchor="middle" transform="rotate(-90 265,100)">WAF</text>
+            <rect x="360" y="65" width="140" height="70" fill="#0a140a" stroke="#2e8b57" stroke-width="2"/>
+            <text x="430" y="95" fill="#d4ceb8" font-family="Courier New" font-size="14" text-anchor="middle" font-weight="bold">Arşiv Sunucusu</text>
+            <text x="430" y="115" fill="#2e8b57" font-family="Courier New" font-size="12" text-anchor="middle">192.168.1.15</text>
+            <rect x="630" y="65" width="140" height="70" fill="#0a1014" stroke="#4682b4" stroke-width="2"/>
+            <text x="700" y="95" fill="#d4ceb8" font-family="Courier New" font-size="14" text-anchor="middle" font-weight="bold">Bilinmeyen Uç</text>
+            <text x="700" y="115" fill="#4682b4" font-family="Courier New" font-size="12" text-anchor="middle">[ IP GİZLENDİ ]</text>
+            <line x1="160" y1="100" x2="245" y2="100" stroke="#8b0000" stroke-width="2" />
+            <polygon points="235,95 245,100 235,105" fill="#8b0000"/>
+            <text x="205" y="90" fill="#8b0000" font-family="Courier New" font-size="11" text-anchor="middle">Anormal İstek</text>
+            <line x1="280" y1="100" x2="355" y2="100" stroke="#c5a059" stroke-width="2" stroke-dasharray="4"/>
+            <polygon points="345,95 355,100 345,105" fill="#c5a059"/>
+            <text x="317" y="90" fill="#c5a059" font-family="Courier New" font-size="11" text-anchor="middle">İhlal?</text>
+            <line x1="500" y1="100" x2="625" y2="100" stroke="#4682b4" stroke-width="2" stroke-dasharray="6,4"/>
+            <polygon points="615,95 625,100 615,105" fill="#4682b4"/>
+            <text x="562" y="90" fill="#4682b4" font-family="Courier New" font-size="12" text-anchor="middle">Dışa Aktarım</text>
+            <text x="562" y="118" fill="#d4ceb8" font-family="Courier New" font-size="10" text-anchor="middle">(Protokol Belirsiz)</text>
+        </svg>
+    </div>
+    
+    <!-- AŞAMA 1 -->
+    <div class="card">
+        <h3><span class="badge">Bölüm I</span> Ağ Çevresi İhlali</h3>
+        <p>Sunulan erişim günlüklerini analiz ederek web katmanındaki yetkisiz erişim denemelerini ve saldırganın sisteme sızdığı uç noktayı tespit edin.</p>
+        <div style="margin-top: 20px;">
+            <label for="flag1Input"><strong>Birinci Mühür (Flag 1):</strong></label><br><br>
+            <input type="text" id="flag1Input" placeholder="TUGA{...}">
+            <button onclick="checkFlag1()">Mührü Çöz</button>
+            <p id="msg1" style="margin-top: 10px; font-size: 14px;"></p>
+        </div>
+    </div>
+
+    <!-- AŞAMA 2 -->
+    <div id="stage2" class="hidden-stage">
+        <h3><span class="badge">Bölüm II</span> Sistem İçi İzler ve Çalıştırma</h3>
+        <p>Saldırganın sunucu içindeki komut geçmişini inceleyerek operasyonel izlerini (post-exploitation) ve gizlemeye çalıştığı zararlı komut satırını deşifre edin.</p>
+        <div style="margin-top: 20px;">
+            <label for="flag2Input"><strong>İkinci Mühür (Flag 2):</strong></label><br><br>
+            <input type="text" id="flag2Input" placeholder="TUGA{...}">
+            <button onclick="checkFlag2()">İkinci Katmanı Aç</button>
+            <p id="msg2" style="margin-top: 10px; font-size: 14px;"></p>
+        </div>
+    </div>
+
+    <!-- AŞAMA 3 -->
+    <div id="stage3" class="hidden-stage">
+        <h3><span class="badge">Bölüm III</span> Ağ Üzerinden Veri Sızdırma</h3>
+        <p>Verilen ağ trafiği loglarını analiz ederek dış dünya ile kurulan tünelleme kanalını ve dışarı sızdırılan veriyi (exfiltration) haritalandırın.</p>
+        <div style="margin-top: 20px;">
+            <label for="flag3Input"><strong>Üçüncü Mühür (Flag 3):</strong></label><br><br>
+            <input type="text" id="flag3Input" placeholder="TUGA{...}">
+            <button onclick="checkFlag3()">Ağ Kilidini Aç</button>
+            <p id="msg3" style="margin-top: 10px; font-size: 14px;"></p>
+        </div>
+    </div>
+
+    <!-- AŞAMA 4 -->
+    <div id="stage4" class="hidden-stage">
+        <h3><span class="badge">Bölüm IV</span> Kalıcılık ve Zararlı Yazılım Vektörleri</h3>
+        <p>Sisteme entegre edilen kalıcılık (persistence) servisini ve arka planda çalışan şüpheli bileşeni inceleyin. Kodu analiz ederek asıl komuta-kontrol verisini mühürleyin.</p>
+        <div style="margin-top: 20px;">
+            <label for="flag4Input"><strong>Final Mührü (Flag 4):</strong></label><br><br>
+            <input type="text" id="flag4Input" placeholder="TUGA{...}">
+            <button onclick="checkFlag4()">Ritüeli Tamamla</button>
+            <p id="msg4" style="margin-top: 10px; font-size: 14px;"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkFlag1() {
+            let val = document.getElementById('flag1Input').value.trim();
+            let msg = document.getElementById('msg1');
+            if(val.includes("b4nkcd00cl") || val === "TUGA{b4nkcd00cl_4uth_s34l}") {
+                msg.style.color = "#c5a059";
+                msg.innerHTML = "[+] Mühür kabul edildi. Bölüm II açılıyor...";
+                document.getElementById('stage2').style.display = "block";
+            } else {
+                msg.style.color = "#8b0000";
+                msg.innerHTML = "[-] Geçersiz mühür. Logları tekrar incele.";
+            }
+        }
+
+        function checkFlag2() {
+            let val = document.getElementById('flag2Input').value.trim();
+            let msg = document.getElementById('msg2');
+            if(val.includes("s0w2N1bHRfZDczbTBuX2JjMzN4") || val === "TUGA{s0w2N1bHRfZDczbTBuX2JjMzN4}") {
+                msg.style.color = "#c5a059";
+                msg.innerHTML = "[+] İkinci mühür kırıldı. Bölüm III (Ağ Analizi) aktifleşiyor...";
+                document.getElementById('stage3').style.display = "block";
+            } else {
+                msg.style.color = "#8b0000";
+                msg.innerHTML = "[-] Geçersiz mühür kodu.";
+            }
+        }
+
+        function checkFlag3() {
+            let val = document.getElementById('flag3Input').value.trim();
+            let msg = document.getElementById('msg3');
+            if(val.includes("3xf1ltr4t10n_v14_dn5") || val === "TUGA{3xf1ltr4t10n_v14_dn5_tunnel}") {
+                msg.style.color = "#c5a059";
+                msg.innerHTML = "[+] Ağ sızıntısı doğrulandı. Final aşaması açılıyor...";
+                document.getElementById('stage4').style.display = "block";
+            } else {
+                msg.style.color = "#8b0000";
+                msg.innerHTML = "[-] Geçersiz ağ mühür kodu.";
+            }
+        }
+
+        function checkFlag4() {
+            let val = document.getElementById('flag4Input').value.trim();
+            let msg = document.getElementById('msg4');
+            let stage4Div = document.getElementById('stage4');
+            
+            if(val.includes("p3rs1st3nc3") || val === "TUGA{p3rs1st3nc3_thr0ugh_5yst3md}") {
+                stage4Div.innerHTML = `
+                    <style>
+                        @keyframes pulseGlow {
+                            0% { fill: #1a4a2e; filter: drop-shadow(0 0 2px #2e8b57); }
+                            100% { fill: #2e8b57; filter: drop-shadow(0 0 12px #2e8b57); }
+                        }
+                        .final-table {
+                            width: 100%;
+                            margin: 25px auto 10px auto;
+                            border-collapse: collapse;
+                            font-family: 'Courier New', monospace;
+                            font-size: 13px;
+                            text-align: left;
+                            border: 1px solid #3a3530;
+                            background: #100f0e;
+                        }
+                        .final-table th, .final-table td {
+                            padding: 12px;
+                            border-bottom: 1px solid #3a3530;
+                        }
+                        .final-table th {
+                            color: #c5a059;
+                            background-color: #161413;
+                            width: 40%;
+                            border-right: 1px solid #3a3530;
+                        }
+                        .final-table td {
+                            color: #d4ceb8;
+                        }
+                        .status-secure {
+                            color: #2e8b57 !important;
+                            font-weight: bold;
+                            letter-spacing: 1px;
+                        }
+                    </style>
+                    <div style="text-align:center; animation: fadeIn 1.5s ease-in;">
+                        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 15px;">
+                            <circle cx="50" cy="50" r="45" stroke="#c5a059" stroke-width="2" fill="none" />
+                            <circle cx="50" cy="50" r="38" stroke="#2e8b57" stroke-width="1" stroke-dasharray="4 4" fill="none" />
+                            <polygon points="50,15 80,70 20,70" stroke="#c5a059" stroke-width="2" fill="none" />
+                            <polygon points="50,85 20,30 80,30" stroke="#c5a059" stroke-width="2" fill="none" />
+                            <circle cx="50" cy="50" r="6" style="animation: pulseGlow 1.5s infinite alternate;" />
+                        </svg>
+                        <h2 style="color:#2e8b57; border-bottom: 1px solid #2e8b57; padding-bottom:10px; margin-top:0;">[☩] RİTÜEL TAMAMLANDI. TEHDİT NÖTRALİZE EDİLDİ.</h2>
+                        
+                        <p style="color:#d4ceb8; font-size: 15px; margin-top:20px; text-align: left;">
+                            Tebrikler Operatör! APT-Erebos ağdan atıldı, arka kapı mühürlendi ve veri sızıntısı durduruldu. Aşağıda operasyonun resmi vaka kapanış özeti sunulmuştur:
+                        </p>
+                        
+                        <table class="final-table">
+                            <tr>
+                                <th>Olay Durumu</th>
+                                <td class="status-secure">KAPATILDI (RESOLVED)</td>
+                            </tr>
+                            <tr>
+                                <th>İzole Edilen Tehdit</th>
+                                <td>APT-Erebos Aktörü</td>
+                            </tr>
+                            <tr>
+                                <th>Kapatılan Zafiyet Vektörü</th>
+                                <td>Yetkisiz Web Erişimi (Perimeter Ingress)</td>
+                            </tr>
+                            <tr>
+                                <th>Durdurulan Sızıntı</th>
+                                <td>DNS Tünelleme (C2 Exfiltration)</td>
+                            </tr>
+                            <tr>
+                                <th>Temizlenen Kalıcılık</th>
+                                <td>sys_update.service & system_worker.py</td>
+                            </tr>
+                            <tr>
+                                <th>Güncel Sunucu Statüsü</th>
+                                <td class="status-secure">GÜVENLİ (SECURE)</td>
+                            </tr>
+                        </table>
+                    </div>
+                `;
+            } else {
+                msg.style.color = "#8b0000";
+                msg.innerHTML = "[-] Geçersiz final mührü. Ritüel başarısız.";
+            }
+        }
+    </script>
+</body>
+</html>
